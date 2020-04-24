@@ -24,6 +24,7 @@ import com.aventstack.extentreports.markuputils.MarkupHelper;
 public class FireClass {
 
 	ReadUserconfig uc =new ReadUserconfig();
+	ReadStats rs = new ReadStats();
 	String failmsg;
 	public static int failcounter;
 	
@@ -91,9 +92,10 @@ public class FireClass {
 			String Testcase_description,String Executionmode, String Severity ,ExtentReports extent,Logger Applog ) throws Throwable {
 
 		uc.getUserConfig();
+		rs.getRepositoryValues();
 		System.out.println("Currently running Testcase : " + Testcasenumber);
-		scre.Execute_script(Sitename,browser_name,Constants.Windows_InputFileLocation+uc.SiteName+"/",Constants.Windows_OutputFileLocation+StartTime.format(Startdate)+"/"+Sitename+"/"+browser_name+"/",
-				Constants.Windows_ScreenshotsLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
+		scre.Execute_script(Sitename,browser_name,Constants.Windows_InputFileLocation+uc.SiteName+"/"+rs.Envtype+"/",Constants.Windows_OutputFileLocation+StartTime.format(Startdate)+"/"+Sitename+"/"+browser_name+"/",
+				Constants.Windows_ScreenshotsLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/"+rs.Envtype +"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
 
 
 	}

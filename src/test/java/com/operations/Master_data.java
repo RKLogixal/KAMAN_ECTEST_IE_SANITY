@@ -11,8 +11,8 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.testng.annotations.DataProvider;
 
 import com.operations.Common.Constants;
+import com.operations.Common.ReadStats;
 import com.operations.Common.ReadUserconfig;
-import com.operations.Common.Readconfig;
 import com.operations.Common.Xls_Reader;
 
 public class Master_data {
@@ -20,10 +20,13 @@ public class Master_data {
 	static Xls_Reader Readexcel = null;
 	static XSSFWorkbook Master_Workbook = null;
 	static ReadUserconfig uc =new ReadUserconfig();
+	static ReadStats rs =new ReadStats();
+
 
 	@DataProvider(name = "Fetch_Master_data")
 	public static Object [][] passdata() throws IOException  {
 		uc.getUserConfig();
+		rs.getRepositoryValues();
 		Object[][]Sheet_data = null;
 		Object[][]Total_data=null;
 		int Final_rows=0;
@@ -117,7 +120,7 @@ public class Master_data {
 		
 		if(uc.OS.equalsIgnoreCase("Windows")) {
 
-			 Master_file =	new File(Constants.Windows_MEFileLocation+"_"+str+".xlsx");
+			 Master_file =	new File(Constants.Windows_MEFileLocation+"/"+rs.Envtype+"/"+"MasterExecutor"+"_"+str+".xlsx");
 		}
 		
 		else if (uc.OS.equalsIgnoreCase("Linux")) {

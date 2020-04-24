@@ -46,9 +46,9 @@ import org.testng.annotations.Test;
 import org.testng.asserts.SoftAssert;
 
 import com.operations.Common.FireClass;
+import com.operations.Common.ReadStats;
 import com.operations.Common.Constants;
 import com.operations.Common.ReadUserconfig;
-import com.operations.Common.Readconfig;
 import com.operations.Common.Script_executor;
 import com.operations.Common.Xls_writer;
 import com.operations.Master_data;
@@ -106,12 +106,13 @@ public class Execute_MainScript {
 	int Testcasecounter;
 	Xls_writer xls_writer=new Xls_writer();
 
-	Readconfig rc =new Readconfig();
+	ReadStats rs = new ReadStats();
 	ReadUserconfig uc =new ReadUserconfig();
 	SendStatusReport email =new SendStatusReport();
 	StringWriter stack = new StringWriter();
 	Script_executor screxe = new Script_executor();
 	FireClass FC = new FireClass();
+	CollectTestData gtest = new CollectTestData();
 
 	public static SimpleDateFormat StartTime;
 	public static SimpleDateFormat EndTime;
@@ -127,10 +128,11 @@ public class Execute_MainScript {
 
 	
 	@BeforeTest()
-	@Parameters({"browser","Channel","Device","DeviceScrHeight","DeviceScrWidth"})
+	@Parameters({"Channel","Device","DeviceScrHeight","DeviceScrWidth"})
 	public void Pre_requisite() throws IOException{
 
-		rc.getObjectRepository();
+		gtest.tests();
+		rs.getRepositoryValues();
 		uc.getUserConfig();
 		extent = new ExtentReports ();
 		Applog=Logger.getLogger(uc.SiteName);
@@ -152,7 +154,7 @@ public class Execute_MainScript {
 
 		if ((uc.HistoricalReports).equalsIgnoreCase("Yes")) {
 
-			String rep_file=System.getProperty("user.dir") +"/Reports/"+ StartTime.format(Startdate)+"/TestSummary_Report.html";
+			String rep_file=System.getProperty("user.dir") +"/Reports/"+ StartTime.format(Startdate)+"/"+rs.Envtype+"/"+"/TestSummary_Report.html";
 			Reportdir= new File(rep_file);
 			Reportdir.getParentFile().mkdirs();
 			Reportdir.createNewFile();
@@ -175,12 +177,12 @@ public class Execute_MainScript {
 	}
 
 
-	@Parameters({"browser","Channel","Device","DeviceScrHeight","DeviceScrWidth"})
+	@Parameters({"Channel","Device","DeviceScrHeight","DeviceScrWidth"})
 	@BeforeTest(dependsOnMethods ="Pre_requisite")
 
-	public void EnvSetup(String browser,String Channel,String Device,int DeviceScrHeight,int DeviceScrWidth) throws IOException
+	public void EnvSetup(String Channel,String Device,int DeviceScrHeight,int DeviceScrWidth) throws IOException
 	{
-		this.browser=browser;
+		this.browser=rs.browser;
 		this.Channel=Channel;
 		//ChromeOptions options = new ChromeOptions();
 		//options.addArguments("start-maximized");

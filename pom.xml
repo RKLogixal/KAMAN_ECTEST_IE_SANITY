@@ -67,7 +67,9 @@
      <version>3.141.0</version>
 </dependency>
         </dependencies>
-
+<properties>
+    <BaseURL>${"https://www.logicbig.com/how-to/maven/mvn-java-exec-args.html"}</BaseURL>
+    </properties>
     <!-- Configure maven surefire plugin for qtest testng-plugin-log-collector to listen the tests-->
     <build>
         <plugins>
@@ -76,6 +78,15 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>2.19.1</version>
                 <configuration>
+                <systemPropertyVariables>
+                 <BaseURL>${BaseURL}</BaseURL>
+                 <Registered_Username>${Registered_Username}</Registered_Username>
+                 <Registered_Password>${Registered_Password}</Registered_Password>
+                 <Managed_Username>${Managed_Username}</Managed_Username>
+                 <Managed_Password>${Managed_Password}</Managed_Password>
+                 <Envtype>${Envtype}</Envtype>
+                  <browser>${browser}</browser>
+                </systemPropertyVariables>
                     <suiteXmlFiles>
                         <suiteXmlFile>TestRun.xml</suiteXmlFile>
                     </suiteXmlFiles>

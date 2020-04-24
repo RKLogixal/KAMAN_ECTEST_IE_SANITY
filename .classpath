@@ -24,5 +24,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="D:/ROhit/Servlet/servlet.jar"/>
 	<classpathentry kind="lib" path="C:/Users/LSPL309/Downloads/xstream.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jre1.8.0_101"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
