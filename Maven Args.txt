@@ -1,6 +1,6 @@
 ECTEST
 
-mvn clean test -DBaseURL="https://ectest.kamandirect.com/storeus/" -DRegistered_Username="archanamithoor@gmail.com" -DRegistered_Password="kaman123" -DManaged_Username="bep-dvlp@kdgcorp.com" -DManaged_Password="bep9919" -Dbrowser="IE" -DEnvtype="ECTEST" 
+mvn clean test -DBaseURL="https://ectest.kamandirect.com/storeus/" -DRegistered_Username="archanamithoor@gmail.com" -DRegistered_Password="kaman123" -DManaged_Username="bep-dvlp@kdgcorp.com" -DManaged_Password="bep999" -Dbrowser="IE" -DEnvtype="ECTEST" 
 
 Prod
 
