@@ -28,24 +28,25 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+import com.operations.Common.ReadStats;
 import com.operations.Common.ReadUserconfig;
 
 public class PunchOutURLCreation {
 
 	//public static void main(String[] args) {
-	// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 	public void GeneratePunchOutURL(){
 
 		try {
 
-			ReadUserconfig ru = new ReadUserconfig();
+			ReadStats rs = new ReadStats();
 			String Mega = null;
 			DataOutputStream out = null;
 			URL url = null;
 			HttpURLConnection con = null ;
 			String PunchOutURLForTest=null;
-			ru.getUserConfig();
-			String Envtype=ru.envtype;
+			rs.getRepositoryValues();
+			String Envtype=rs.Envtype;
 
 			System.out.println("START");
 			String SetfilePath = "SetAppData.properties";
@@ -259,60 +260,74 @@ public class PunchOutURLCreation {
 				out = new DataOutputStream(con.getOutputStream());
 				out.writeBytes(ParameterStringBuilder.getParamsString(parameters));
 			}
+
+			else if (Envtype.equalsIgnoreCase("Prod")) {
+
+				System.out.println("Punchout testing not applicable on Production environment..!!!");
+
+
+			}
 			//con.setDoOutput(true);
 			//DataOutputStream out = new DataOutputStream(con.getOutputStream());
 			//out.writeBytes(Mega);
-			out.flush();
-			out.close();
 
-			con.setConnectTimeout(5000);
-			con.setReadTimeout(5000);
+			if (!(Envtype.equalsIgnoreCase("Prod"))) {
 
-			int status = con.getResponseCode();
+				out.flush();
+				out.close();
 
-			switch (status) {
-			case HttpURLConnection.HTTP_MOVED_TEMP:
-				String location = con.getHeaderField("Location");
-			//	System.out.println("location = " + location);
-			default:
+				con.setConnectTimeout(5000);
+				con.setReadTimeout(5000);
+
+				int status = con.getResponseCode();
+
+				switch (status) {
+				case HttpURLConnection.HTTP_MOVED_TEMP:
+					String location = con.getHeaderField("Location");
+					//	System.out.println("location = " + location);
+				default:
+				}
+
+				//System.out.println("Status = " + status);
+
+				BufferedReader in = new BufferedReader(
+						new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuffer content = new StringBuffer();
+				while ((inputLine = in.readLine()) != null) {
+					content.append(inputLine);
+				}
+				in.close();
+
+				con.disconnect();
+
+				//System.out.println(content);
+
+				if (Envtype.equalsIgnoreCase("ECTEST")) {
+
+					String PunchURL=content.toString();
+
+					PunchOutURLForTest = getPunchOutURL(PunchURL);
+				}
+				else if (Envtype.equalsIgnoreCase("LogixalQA")) {
+
+					String StrContent =String.valueOf(content);
+					String[] parts = StrContent.split("=", 3);
+
+					PunchOutURLForTest = parts[2];
+
+					System.out.println(PunchOutURLForTest);
+				}
+
+				bw.write("PunchOutURL="+ PunchOutURLForTest);
+				bw.write(System.lineSeparator());
+				bw.close();
+
+
 			}
 
-			//System.out.println("Status = " + status);
-
-			BufferedReader in = new BufferedReader(
-					new InputStreamReader(con.getInputStream()));
-			String inputLine;
-			StringBuffer content = new StringBuffer();
-			while ((inputLine = in.readLine()) != null) {
-				content.append(inputLine);
-			}
-			in.close();
-
-			con.disconnect();
-
-			//System.out.println(content);
-
-			if (Envtype.equalsIgnoreCase("ECTEST")) {
-
-				String PunchURL=content.toString();
-
-				PunchOutURLForTest = getPunchOutURL(PunchURL);
-			}
-			else if (Envtype.equalsIgnoreCase("LogixalQA")) {
-
-				String StrContent =String.valueOf(content);
-				String[] parts = StrContent.split("=", 3);
-
-				PunchOutURLForTest = parts[2];
-
-				System.out.println(PunchOutURLForTest);
-			}
-
-			bw.write("PunchOutURL="+ PunchOutURLForTest);
-			bw.write(System.lineSeparator());
-			bw.close();
 			System.out.println("END");
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
