@@ -25,6 +25,7 @@ import org.openqa.selenium.WebDriver;
 import org.testng.SkipException;
 
 import com.Utilities.ScreenshotsUtility;
+import com.Utilities.TakeFullScreenCapture;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;
 import com.aventstack.extentreports.markuputils.ExtentColor;
@@ -43,14 +44,15 @@ public class Script_executor {
 	String Key;
 	String Value;
 	String Test_value;
-	ScreenshotsUtility scr;
+	//ScreenshotsUtility scr;
+	TakeFullScreenCapture Fullscr;
 	Xls_writer xls_writer=new Xls_writer();
 	//ExtentTest logger;
 	File outdir;
 	Properties allObjects;
 	public static String Object;
 	long FinalTime = 0;
-	
+
 
 	public void Execute_script(String Sitename ,String browsername,String Filepath,String WriteOutput,String ScreenshotsPath, WebDriver driver,String Section,String Functionality,String Testcasenumber,
 			String Testcase_description , String Executionmode,String Severity,String Screenshots , String ExcelReports,ExtentReports extent,Logger log) throws Throwable{
@@ -58,9 +60,10 @@ public class Script_executor {
 
 		Keywords_finder operation = new Keywords_finder(driver,log);
 		ReadObject object = new ReadObject();
-
+		//scr=new ScreenshotsUtility();
+		Fullscr = new TakeFullScreenCapture();
 		allObjects =  object.getObjectRepository();
-		
+
 		String InputFilepath=Filepath+Functionality+"/";
 		Readexcel = new Xls_Reader(Filepath+Section+"/"+Functionality+"/"+Testcasenumber+".xlsx");
 		File file =	new File(Filepath +Section+"/"+Functionality +"/"+ Testcasenumber+".xlsx");
@@ -98,12 +101,13 @@ public class Script_executor {
 
 			String str = Teststep_sheet.getRow(i).toString();
 			Row row = Teststep_sheet.getRow(i);
-			scr=new ScreenshotsUtility();
+			
+			
 			String Keyword=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 1, i);
 			Object=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 2, i);
 			String ObjectType=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 3, i);
 			String Data_descriptor=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 4, i);
-			
+
 			long start = System.currentTimeMillis();
 
 			if(!(Data_descriptor=="")){
@@ -117,12 +121,13 @@ public class Script_executor {
 				Teststeps_results.put(i+1, new Object[] {Wrk,  Keyword, Object,ObjectType,"","Pass"});
 
 			}
-			
+
 			if(Screenshots.equalsIgnoreCase("Yes")) {
 				try {
 
 
-					scr.Screenshots(driver,ScreenshotsPath,Wrk);
+					//scr.Screenshots(driver,ScreenshotsPath,Wrk);
+					Fullscr.Screenshots(driver, ScreenshotsPath, Wrk);
 
 
 
@@ -137,13 +142,14 @@ public class Script_executor {
 		}
 
 		if(ExcelReports.equalsIgnoreCase("Yes")) {
-			
+
 			GenerateTestResults(WriteOutput);
 		}
-		
+
 		log.info("Execution Ended for testcase number : "+ Testcasenumber+" at time : " + dateFormat.format(date));
-		
-		scr=null;
+
+		//scr=null;
+		Fullscr=null;
 
 	}
 
