@@ -51,7 +51,7 @@ public class FireClass {
 
 	}
 
-	public void FailedTCOperation(String Object,Script_executor screxe,WebDriver webdriver,Xls_writer xls_writer,Map<Integer, Object[]> Testscase_failresults ,String browser_name,String Functionality,String Testcasenumber, 
+	public void FailedTC_SeleniumExcpetions(String Object,Script_executor screxe,WebDriver webdriver,Xls_writer xls_writer,Map<Integer, Object[]> Testscase_failresults ,String browser_name,String Functionality,String Testcasenumber, 
 			String Severity,SimpleDateFormat StartTime,Date Startdate,SoftAssert softAssert,ExtentTest test,ExtentReports extent) throws Exception {
 
 		uc.getUserConfig();
@@ -82,7 +82,45 @@ public class FireClass {
 		Mouseaction.moveToElement(ele).build().perform();
 		webdriver.findElement(By.xpath("//*[@id='logout-button']")).click();
 		//test.fail(MarkupHelper.createLabel(Testcasenumber+" has been failed....", ExtentColor.RED));
-		*/Assert.fail(failmsg);
+		*/
+		
+		Assert.fail(failmsg);
+		
+	}
+	
+	public void FailedTC_Excpetions(Exception e,String Object,Script_executor screxe,WebDriver webdriver,Xls_writer xls_writer,Map<Integer, Object[]> Testscase_failresults ,String browser_name,String Functionality,String Testcasenumber, 
+			String Severity,SimpleDateFormat StartTime,Date Startdate,SoftAssert softAssert,ExtentTest test,ExtentReports extent) throws Exception {
+
+		uc.getUserConfig();
+
+		
+		Object=screxe.Object;
+		//VerifyUserLoginforLogout(webdriver);
+
+
+		if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
+
+			xls_writer.GenerateFailReport(Testscase_failresults, uc.SiteName, browser_name, Functionality, Testcasenumber, Severity,System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/");
+
+		}
+
+		//xls_writer.GenerateFailReport(Testscase_failresults, uc.SiteName, browser_name, Functionality, Testcasenumber, Severity,"./Failed_Reports/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/");
+
+
+
+		softAssert.assertAll();
+		test = extent.createTest(browser_name+"_"+Testcasenumber);	
+		test.fail(MarkupHelper.createLabel("",ExtentColor.RED));
+		failcounter=failcounter+1;
+		
+		/*Actions Mouseaction = new Actions(webdriver);
+		WebElement ele = webdriver.findElement(By.xpath("//div[text()='My Account']"));
+		Mouseaction.moveToElement(ele).build().perform();
+		webdriver.findElement(By.xpath("//*[@id='logout-button']")).click();
+		//test.fail(MarkupHelper.createLabel(Testcasenumber+" has been failed....", ExtentColor.RED));
+		*/
+		
+		//Assert.fail(failmsg);
 		
 	}
 

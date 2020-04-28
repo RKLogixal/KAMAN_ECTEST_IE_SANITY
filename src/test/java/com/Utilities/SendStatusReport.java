@@ -27,7 +27,7 @@ import com.testcases.driverscripts.Execute_MainScript;
 public class SendStatusReport {
 	//public static void main(String[] args) {
 
-	public void performTask() throws IOException {
+	/*public void performTask() throws IOException {
 
 
 		Date date;
@@ -62,13 +62,13 @@ public class SendStatusReport {
 				+ "<br />"+"<br />"+"<br />"+"<br />"+"<br />"+"<br />"
 				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />"+"<br />";
 
-		/*Recipient's email ID 
+		Recipient's email ID 
 		String to = "rohit.karkhanis@logixal.com";
 		 Sender's email ID 
 		String from = "jenkins@logixal.com";
 		final String username = "jenkins@logixal.com";
 		final String password = "Qwert@123";
-		String host = "smtp.office365.com";*/
+		String host = "smtp.office365.com";
 
 		String to = ruser.emailTo;
 		String from = ruser.emailFrom;
@@ -102,8 +102,8 @@ public class SendStatusReport {
 
 			InternetAddress[] parse = InternetAddress.parse(to , true);
 			message.setRecipients(javax.mail.Message.RecipientType.TO,  parse);
-			/*message.setRecipients(Message.RecipientType.TO,
-					InternetAddress.parse(to));*/
+			message.setRecipients(Message.RecipientType.TO,
+					InternetAddress.parse(to));
 
 			int SendPassStatus = PassTCpercent(passcount,TotalTC);
 			int SendFailStatus = FailTCpercent(failcount,TotalTC);
@@ -192,5 +192,5 @@ public class SendStatusReport {
 		//System.out.println(Math.round(Failpercentage));
 
 		return Math.round(Failpercentage);
-	}
+	}*/
 }
