@@ -13,9 +13,9 @@ import com.testcases.driverscripts.Execute_MainScript;
 public class CreateExecutionStatusHTMLfile {
 
 	//public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
+	// TODO Auto-generated method stub
 
-		public void GenerateFinalExecutionStatus() throws IOException {
+	public void GenerateFinalExecutionStatus() throws IOException {
 		Date date;
 		SimpleDateFormat Time;
 		Date Sdate=Execute_MainScript.Startdate;
@@ -24,9 +24,50 @@ public class CreateExecutionStatusHTMLfile {
 		int skipcount = Execute_MainScript.skipcounter;
 		int failcount = FireClass.failcounter;
 		int TotalTC = Execute_MainScript.TotalTCcounter;
+		String browser = Execute_MainScript.browser;
 		String ExecutionStatus = null;
 		FileWriter writer = new FileWriter("./test-output/MailStatus.html", false);
-		String msg="Test execution status as below :"+"<br />"+"<br />"
+		String StatusColor=null;
+
+
+
+		int SendPassStatus = PassTCpercent(passcount,TotalTC);
+		int SendFailStatus = FailTCpercent(failcount,TotalTC);
+
+		if(SendPassStatus == 100) {
+
+			ExecutionStatus = "PASSED";
+		}
+
+		else if (SendPassStatus >= 80){
+
+			ExecutionStatus = "CONDITIONALLY PASSED";
+		}
+
+		else if (SendPassStatus < 80) {
+
+			ExecutionStatus = "FAILED";
+		}
+
+
+		if (ExecutionStatus=="PASSED") {
+
+			StatusColor="#228B22";
+		}
+
+		else if (ExecutionStatus=="FAILED") {
+
+			StatusColor="#ff0000";
+		}
+
+		else if (ExecutionStatus=="CONDITIONALLY PASSED") {
+
+			StatusColor="#FFA500";
+		}
+
+		String mailBOdy="Test execution status as below :"+"<br />"+"<br />"
+				+"<p style='color:"+StatusColor+";font-size:20px'><font color='Black'; size=4px><b>Execution Status: </font>"+ExecutionStatus+"</b></p>"
+				+ "<b>Test browser : </b>"+browser+"<br />"
 				+ "<b>Test execution Start Time : </b>"+Sdate+"<br />"
 				+ "<b>Test execution End Time : </b>"+edate+"<br />"+"<br />"
 				+ "<table width='60%' border='1' align='Left'>"
@@ -45,10 +86,39 @@ public class CreateExecutionStatusHTMLfile {
 				+ "<br />"+"<br />"+"<br />"+"<br />"+"<br />"+"<br />"
 				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />"+"<br />";
 
-		writer.write(msg);
+		writer.write(mailBOdy);
 		writer.close();
 		System.out.println("Success...");
 	}
 
+	public static int PassTCpercent(int passTCcount , int TotalTCcount) {
+		float Passpercentage; 
+		float fpassTCcount = passTCcount;
+		float fTotalTCcount = TotalTCcount;
+
+		Passpercentage = (float)(fpassTCcount/fTotalTCcount*100);
+		System.out.println(Passpercentage);
+
+		Math.round(Passpercentage);
+
+		//System.out.println(Math.round(Passpercentage));
+
+		return Math.round(Passpercentage);
+	}
+
+	public static  int FailTCpercent(int FailTCcount , int TotalTCcount) {
+		float Failpercentage;
+		float fFailTCcount = FailTCcount;
+		float fTotalTCcount = TotalTCcount;
+
+		Failpercentage = (float)(fFailTCcount/fTotalTCcount*100);
+
+		Math.round(Failpercentage);
+
+		//System.out.println(Math.round(Failpercentage));
+
+		return Math.round(Failpercentage);
+	}
+
 }
-	
+
