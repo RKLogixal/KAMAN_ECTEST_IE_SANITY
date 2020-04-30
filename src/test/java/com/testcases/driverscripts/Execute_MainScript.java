@@ -81,7 +81,7 @@ public class Execute_MainScript {
 
 	Script_executor scre = new Script_executor();
 
-	String browser;
+	public static String browser;
 
 	String Testcasenumber;
 
@@ -285,21 +285,16 @@ public class Execute_MainScript {
 		
 
 	/*else if (Channel.equalsIgnoreCase("Mobile")) {
-
 		this.Device=Device;
 		this.DeviceScrHeight=DeviceScrHeight;
 		this.DeviceScrWidth=DeviceScrWidth;
-
 		if (browser.equalsIgnoreCase("firefox"))
 		{
-
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") +"/Browser_files/geckodriver-v0.23.0-win64/geckodriver.exe");
 			webdriver = new FirefoxDriver();
 			Dimension d = new Dimension(DeviceScrWidth,DeviceScrHeight);
 			webdriver.manage().window().setSize(d);
 			//Applog.info("Mobile Test execution started on Firefox" + dateFormat.format(date));
-
-
 		} else if (browser.equalsIgnoreCase("chrome"))
 		{
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") +"/Browser_files/chromedriver_win32/chromedriver.exe");
@@ -308,14 +303,11 @@ public class Execute_MainScript {
 			Dimension d = new Dimension(DeviceScrWidth,DeviceScrHeight);
 			webdriver.manage().window().setSize(d);
 			Applog.info("Mobile Test execution started on Chrome" + StartTime.format(Startdate));
-
 		}
-
 		else
 		{
 			throw new IllegalArgumentException("The Browser Type is Undefined");
 		}
-
 	}
 	else {
 		throw new IllegalArgumentException("The Channel Type is Undefined");
@@ -493,7 +485,6 @@ public void TestResults(ITestResult result) {
 
 /*@AfterSuite
 	public void close() {
-
 		//email.performTask();
 	}  
  */
