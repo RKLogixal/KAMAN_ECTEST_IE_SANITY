@@ -66,7 +66,7 @@ public class CreateExecutionStatusHTMLfile {
 		}
 
 		String mailBOdy="Test execution status as below :"+"<br />"+"<br />"
-				+"<p style='color:"+StatusColor+";font-size:20px'><font color='Black'; size=4px><b>Execution Status: </font>"+ExecutionStatus+"</b></p>"
+				+"<p style='color:"+StatusColor+";font-size:20px'><font color='Black'; size=3px><b>Execution Status: </font>"+ExecutionStatus+"</b></p>"
 				+ "<b>Test browser : </b>"+browser+"<br />"
 				+ "<b>Test execution Start Time : </b>"+Sdate+"<br />"
 				+ "<b>Test execution End Time : </b>"+edate+"<br />"+"<br />"
