@@ -202,7 +202,7 @@ public class Execute_MainScript {
 		if (Channel.equalsIgnoreCase("Desktop")) {
 
 
-			if (browser.equalsIgnoreCase("IE"))
+			if (browser.equalsIgnoreCase("IE11"))
 			{
 
 				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
@@ -351,7 +351,7 @@ public class Execute_MainScript {
 
 		if(Executionmode.equalsIgnoreCase("Yes")){
 
-			if (browser.equalsIgnoreCase("IE")){
+			if (browser.equalsIgnoreCase("IE11")){
 
 				Testcasecounter = Testcasecounter + 1;
 
