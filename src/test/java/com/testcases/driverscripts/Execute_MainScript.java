@@ -442,6 +442,8 @@ public class Execute_MainScript {
 				}
 
 			}
+			
+		}
 			else{
 
 				if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
@@ -453,7 +455,7 @@ public class Execute_MainScript {
 				throw new SkipException(Testcasenumber +" has been skipped..");
 			}
 		}
-	}
+	
 
 		@AfterMethod
 		public void TestResults(ITestResult result) throws IOException {
