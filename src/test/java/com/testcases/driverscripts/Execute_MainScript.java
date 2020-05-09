@@ -197,7 +197,7 @@ public class Execute_MainScript {
 			{
 
 				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
-				ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
+				//ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 				ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 				ieOptions.setCapability("requireWindowFocus", true);
 				ieOptions.setCapability("ignoreZoomSetting", true);
