@@ -8,7 +8,7 @@
     <parameter name="DeviceScrHeight" value="812" />
     
     <classes>
-     <class name="com.testcases.driverscripts.Closecon"/>
+     <class name="com.testcases.driverscripts.Execute_MainScript"/>
     </classes>
 	 </test> <!-- Test -->
       </suite> <!-- Suite -->
