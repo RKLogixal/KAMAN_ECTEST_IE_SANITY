@@ -208,8 +208,9 @@ public class Execute_MainScript {
 				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 				ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 				ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
-				ieOptions.setCapability("requireWindowFocus", true);
-				ieOptions.setCapability("ignoreZoomSetting", true);
+				//ieOptions.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR, false);
+				//ieOptions.setCapability("requireWindowFocus", true);
+				//ieOptions.setCapability("ignoreZoomSetting", true);
 				//ieOptions.setCapability("nativeEvents",false);
 				//ieOptions.
 
@@ -342,8 +343,8 @@ public class Execute_MainScript {
 		this.Severity=Severity;
 
 		TotalTCcounter = TotalTCcounter +1;
-		
-		
+
+
 
 
 
@@ -371,148 +372,154 @@ public class Execute_MainScript {
 					webdriver=new InternetExplorerDriver(ieOptions);
 					webdriver.manage().window().maximize();
 					Testcasecounter=0;
-				}
-
-			}
 
 
-
-			try {
-				if(Channel.equalsIgnoreCase("Desktop")){
-
-					if(uc.OS.equalsIgnoreCase("Windows")) {
-
-						FC.ExecuteTestcasesWindows(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog,ExecutionRound);
-						System.gc();
-					}
-
-					if(uc.OS.equalsIgnoreCase("Linux")) {
-
-						FC.ExecuteTestcasesLinux(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog);
-					}
-
-					else {
-						//System.out.println("Please Specify OS correctly i.e. either Windows or Linux...!!!!");
-					}
-					//System.out.println("Currently running Testcase : " + Testcasenumber);
-					//	scre.Execute_script(Sitename,browser_name,Constants.Windows_InputFileLocation+uc.SiteName+"/",Constants.Windows_OutputFileLocation+StartTime.format(Startdate)+"/"+Sitename+"/"+browser_name+"/",
-					//		Constants.Windows_ScreenshotsLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
-
-				}
-				else if (Channel.equalsIgnoreCase("Mobile")) {
-					scre.Execute_script(Sitename,browser,"./Input_files/Actual_testcases/"+uc.SiteName+"/","./Output_files/"+StartTime.format(Startdate)+"/"+Sitename+"/"+browser+"/"+Device+"/",
-							"./Screenshots/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/"+Device+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
+					/*System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
+					webdriver=new InternetExplorerDriver(ieOptions);
+					webdriver.manage().window().maximize();
+					Testcasecounter=0;*/
 
 				}
 
-			} catch (TimeoutException Te) {
 
 
-				Te.printStackTrace(new PrintWriter(stack));
-				Applog.error(stack.toString());
-				FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+				try {
+					if(Channel.equalsIgnoreCase("Desktop")){
+
+						if(uc.OS.equalsIgnoreCase("Windows")) {
+
+							FC.ExecuteTestcasesWindows(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog,ExecutionRound);
+							System.gc();
+						}
+
+						if(uc.OS.equalsIgnoreCase("Linux")) {
+
+							FC.ExecuteTestcasesLinux(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog);
+						}
+
+						else {
+							//System.out.println("Please Specify OS correctly i.e. either Windows or Linux...!!!!");
+						}
+						//System.out.println("Currently running Testcase : " + Testcasenumber);
+						//	scre.Execute_script(Sitename,browser_name,Constants.Windows_InputFileLocation+uc.SiteName+"/",Constants.Windows_OutputFileLocation+StartTime.format(Startdate)+"/"+Sitename+"/"+browser_name+"/",
+						//		Constants.Windows_ScreenshotsLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
+
+					}
+					else if (Channel.equalsIgnoreCase("Mobile")) {
+						scre.Execute_script(Sitename,browser,"./Input_files/Actual_testcases/"+uc.SiteName+"/","./Output_files/"+StartTime.format(Startdate)+"/"+Sitename+"/"+browser+"/"+Device+"/",
+								"./Screenshots/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/"+Device+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
+
+					}
+
+				} catch (TimeoutException Te) {
+
+
+					Te.printStackTrace(new PrintWriter(stack));
+					Applog.error(stack.toString());
+					FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+
+				}
+
+				catch(NoSuchElementException Nse) {
+
+					Nse.printStackTrace(new PrintWriter(stack));
+					Applog.error(stack.toString());
+					FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+
+				}
+				catch(Exception e) {
+
+					e.printStackTrace(new PrintWriter(stack));
+					System.out.println(stack.toString());
+					Applog.error(stack.toString());
+					FC.FailedTC_Excpetions(stack.toString(),Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+					Assert.fail(stack.toString());
+
+					//	}
+					//stack.flush();
+
+
+				}
 
 			}
+			else{
 
-			catch(NoSuchElementException Nse) {
+				if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
 
-				Nse.printStackTrace(new PrintWriter(stack));
-				Applog.error(stack.toString());
-				FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+					xls_writer.GenearateSkipFile(Testcase_skipresults,Functionality, Testcasenumber, Severity,System.getProperty("user.dir")+"/Output_files/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/");
+				}
 
+				Applog.info(Testcasenumber + " has been skipped for this execution...");
+				throw new SkipException(Testcasenumber +" has been skipped..");
 			}
-			catch(Exception e) {
-
-				e.printStackTrace(new PrintWriter(stack));
-				System.out.println(stack.toString());
-				Applog.error(stack.toString());
-				FC.FailedTC_Excpetions(stack.toString(),Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
-				Assert.fail(stack.toString());
-
-				//	}
-				//stack.flush();
-
-
-			}
-
-		}
-		else{
-
-			if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
-
-				xls_writer.GenearateSkipFile(Testcase_skipresults,Functionality, Testcasenumber, Severity,System.getProperty("user.dir")+"/Output_files/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/");
-			}
-
-			Applog.info(Testcasenumber + " has been skipped for this execution...");
-			throw new SkipException(Testcasenumber +" has been skipped..");
 		}
 	}
 
-	@AfterMethod
-	public void TestResults(ITestResult result) throws IOException {
-		if (result.getStatus() == ITestResult.FAILURE) {
+		@AfterMethod
+		public void TestResults(ITestResult result) throws IOException {
+			if (result.getStatus() == ITestResult.FAILURE) {
 
-			System.out.println("Test execution status : FAILED...!!!!");
-
-			FC.CreateFailTCList(Section, Functionality, Testcasenumber, Testcase_description, Executionmode, Severity);
-			FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/"+ExecutionRound;
-			xls_writer.GenerateFailReport(Testscase_failresults, Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity,FailedsheetPath,ExecutionRound);
-			
-			if (Channel.equalsIgnoreCase("Mobile")) {
-				test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
-				test.fail(MarkupHelper.createLabel(Testcasenumber+" has been failed....", ExtentColor.RED));
 				System.out.println("Test execution status : FAILED...!!!!");
-			}
-			else {
-				//test = extent.createTest(browser_name+"_"+Testcasenumber);
-				//	test.fail(MarkupHelper.createLabel(Testcasenumber+"\t"+" has been failed due to following reason : "+ "\n"+ stack.toString(), ExtentColor.RED));
+
+				FC.CreateFailTCList(Section, Functionality, Testcasenumber, Testcase_description, Executionmode, Severity);
+				FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/"+ExecutionRound;
+				xls_writer.GenerateFailReport(Testscase_failresults, Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity,FailedsheetPath,ExecutionRound);
+
+				if (Channel.equalsIgnoreCase("Mobile")) {
+					test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
+					test.fail(MarkupHelper.createLabel(Testcasenumber+" has been failed....", ExtentColor.RED));
+					System.out.println("Test execution status : FAILED...!!!!");
+				}
+				else {
+					//test = extent.createTest(browser_name+"_"+Testcasenumber);
+					//	test.fail(MarkupHelper.createLabel(Testcasenumber+"\t"+" has been failed due to following reason : "+ "\n"+ stack.toString(), ExtentColor.RED));
+
+				}
+
+			}        
+			else if (result.getStatus() == ITestResult.SKIP) {
+
+				if (Channel.equalsIgnoreCase("Mobile")) {
+					test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
+					test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
+					//System.out.println("Test execution status : SKIPPED.....");
+				}
+
+				else {
+
+					test = extent.createTest(browser+"_"+Testcasenumber);
+					test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
+					//System.out.println("Test execution status : SKIPPED.....");
+					skipcounter = skipcounter +1;
+				}
 
 			}
+			else if (result.getStatus() == ITestResult.SUCCESS) {
 
-		}        
-		else if (result.getStatus() == ITestResult.SKIP) {
+				if (Channel.equalsIgnoreCase("Mobile")) {
+					test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
+					test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
+					System.out.println("Test execution status : PASSED...$$$$");
+				}
+				else {
+					test = extent.createTest(browser+"_"+Testcasenumber);
+					test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
+					System.out.println("Test execution status : PASSED...$$$$");
+					Passcounter = Passcounter +1;
 
-			if (Channel.equalsIgnoreCase("Mobile")) {
-				test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
-				test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
-				//System.out.println("Test execution status : SKIPPED.....");
+				}
+
 			}
-
-			else {
-
-				test = extent.createTest(browser+"_"+Testcasenumber);
-				test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
-				//System.out.println("Test execution status : SKIPPED.....");
-				skipcounter = skipcounter +1;
-			}
-
 		}
-		else if (result.getStatus() == ITestResult.SUCCESS) {
-
-			if (Channel.equalsIgnoreCase("Mobile")) {
-				test = extent.createTest(Sitename+"_"+browser+"_"+Device+"_"+Testcasenumber);
-				test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
-				System.out.println("Test execution status : PASSED...$$$$");
-			}
-			else {
-				test = extent.createTest(browser+"_"+Testcasenumber);
-				test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
-				System.out.println("Test execution status : PASSED...$$$$");
-				Passcounter = Passcounter +1;
-
-			}
-
-		}
-	}
 
 
-	/*@AfterSuite
+		/*@AfterSuite
 	public void close() {
 		//email.performTask();
 	}  
-	 */
+		 */
 
-/*
+		/*
 	@AfterClass()
 
 	public void GetFailedData() throws Throwable {
@@ -529,7 +536,7 @@ public class Execute_MainScript {
 			String Testcase_description= String.valueOf(mapping[Failrow][3]);
 			String Executionmode= String.valueOf(mapping[Failrow][4]);
 			String Severity= String.valueOf(mapping[Failrow][5]);
-			
+
 			ExecuteTest(Section, Functionality, Testcasenumber, Testcase_description, Executionmode, Severity);
 			System.gc();
 		}
@@ -542,7 +549,7 @@ public class Execute_MainScript {
 
 
 
-	/*@AfterClass(dependsOnMethods="GetFailedData")
+		/*@AfterClass(dependsOnMethods="GetFailedData")
 	@Parameters({"browser"})
 
 	public void close(String browser) throws IOException {
@@ -600,4 +607,4 @@ public class Execute_MainScript {
 	}*/
 
 
-}
+	}
