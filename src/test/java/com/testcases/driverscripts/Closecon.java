@@ -24,6 +24,7 @@ public class Closecon {
 		InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 		ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 		ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
+		ieOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
 		//ieOptions.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR, false);
 		ieOptions.setCapability("requireWindowFocus", true);
 		ieOptions.setCapability("ignoreZoomSetting", true);
