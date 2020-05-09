@@ -134,13 +134,13 @@ public class Xls_writer {
 	}
 
 
-	public void GenerateFailReport(Map<Integer, Object[]> ResultsFailmap,String Sitename, String Browser, String Functionality,String TestcaseNumber,String Severity,String WriteFailedOutput) throws IOException{
+	public void GenerateFailReport(Map<Integer, Object[]> ResultsFailmap,String Section, String Functionality,String TestcaseNumber,String Testcase_description,String Executionmode,String Severity,String WriteFailedOutput,String ExecutionRound) throws IOException{
 
 		if(failfile==null){
-			fail_sheet = Createfailfile(ResultsFailmap,WriteFailedOutput);
+			fail_sheet = Createfailfile(ResultsFailmap,WriteFailedOutput,ExecutionRound);
 			failcount++;
 			//ResultsFailmap.put(failcount, new Object[] {"Sitename","Browser","Functionality","TestcaseNumber","Severity","Actual_results"});
-			ResultsFailmap.put(failcount, new Object[] {Sitename,Browser,Functionality,TestcaseNumber,Severity,"Failed"});
+			ResultsFailmap.put(failcount, new Object[] {Section,Functionality,TestcaseNumber,Testcase_description,Executionmode,Severity});
 			
 			Set<Integer> fail_keyset = ResultsFailmap.keySet();
 
@@ -168,16 +168,16 @@ public class Xls_writer {
 			ResultsFailmap.clear();
 		}
 		else{
-			UpdateFailFile(failfile,fail_workbook ,fail_sheet, ResultsFailmap,Sitename,Browser, Functionality, TestcaseNumber, Severity, failcount,fail_rownum);
+			UpdateFailFile(failfile,fail_workbook ,fail_sheet, ResultsFailmap,Section, Functionality, TestcaseNumber, Testcase_description,Executionmode,Severity, failcount,fail_rownum);
 
 		}
 
 
 	}
 
-	public  XSSFSheet Createfailfile(Map<Integer, Object[]> ResultsFailmap,String WriteFailedOutput) throws IOException{
+	public  XSSFSheet Createfailfile(Map<Integer, Object[]> ResultsFailmap,String WriteFailedOutput,String ExecutionRound) throws IOException{
 
-		fail_output_dir=WriteFailedOutput+"/Master_executor_FailedTC's.xlsx";
+		fail_output_dir=WriteFailedOutput+"/FailedTC's"+ExecutionRound+".xlsx";
 		failfile= new File(fail_output_dir);
 		if (failfile.getParentFile().mkdirs()) {
 			failfile.createNewFile();
@@ -189,14 +189,14 @@ public class Xls_writer {
 		fail_workbook = new XSSFWorkbook();
 		fail_sheet = fail_workbook.createSheet("Test Results");
 		failcount++;
-		ResultsFailmap.put(failcount, new Object[] {"Sitename","Browser","Functionality","TestcaseNumber","Severity","Actual_results"});
+		ResultsFailmap.put(failcount, new Object[] {"Section","Functionality","Testcase_Number","Testcase_description","Runmode","Severity"});
 		return fail_sheet;
 
 	}
 
-	public void UpdateFailFile(File file,XSSFWorkbook workbook,XSSFSheet sheet,Map<Integer, Object[]> ResultsFailmap,String Sitename, String Browser,String Functionality,String TestcaseName,String Severity,int count,
+	public void UpdateFailFile(File file,XSSFWorkbook workbook,XSSFSheet sheet,Map<Integer, Object[]> ResultsFailmap,String Section,String Functionality,String TestcaseNumber,String Testcase_description , String Executionmode, String Severity,int count,
 			int LastRownum) throws IOException{
-		ResultsFailmap.put(count, new Object[] {Sitename,Browser,Functionality, TestcaseName,Severity,"Failed"});
+		ResultsFailmap.put(count, new Object[] {Section,Functionality, TestcaseNumber,Testcase_description,Executionmode,Severity});
 		count++;
 		Set<Integer> fail_keyset = ResultsFailmap.keySet();
 		fail_cellnum=0;

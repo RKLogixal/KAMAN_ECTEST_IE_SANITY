@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests" thread-count="2">
+
      <test name="IE_test">
      <parameter name="Channel" value="Desktop" />
 	  <parameter name="Device" value="iphone X" />
@@ -9,6 +10,7 @@
     
     <classes>
      <class name="com.testcases.driverscripts.Execute_MainScript"/>
+     <class name="com.testcases.driverscripts.Execute_FailedScript"/>
     </classes>
 	 </test> <!-- Test -->
       </suite> <!-- Suite -->

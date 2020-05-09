@@ -8,6 +8,7 @@ import java.util.Date;
 
 import com.operations.Common.FireClass;
 import com.operations.Common.ReadUserconfig;
+import com.testcases.driverscripts.Execute_FailedScript;
 import com.testcases.driverscripts.Execute_MainScript;
 
 public class CreateExecutionStatusHTMLfile {
@@ -19,10 +20,10 @@ public class CreateExecutionStatusHTMLfile {
 		Date date;
 		SimpleDateFormat Time;
 		Date Sdate=Execute_MainScript.Startdate;
-		Date edate=Execute_MainScript.Enddate;
+		Date edate=Execute_FailedScript.Enddate;
 		int passcount = Execute_MainScript.Passcounter;
 		int skipcount = Execute_MainScript.skipcounter;
-		int failcount = FireClass.failcounter;
+		int failcount = Execute_FailedScript.failcounter;
 		int TotalTC = Execute_MainScript.TotalTCcounter;
 		String browser = Execute_MainScript.browser;
 		String ExecutionStatus = null;
