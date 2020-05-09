@@ -44,8 +44,8 @@ public class Script_executor {
 	String Key;
 	String Value;
 	String Test_value;
-	ScreenshotsUtility scr;
-	//TakeFullScreenCapture Fullscr;
+	//ScreenshotsUtility scr;
+	TakeFullScreenCapture Fullscr;
 	Xls_writer xls_writer=new Xls_writer();
 	//ExtentTest logger;
 	File outdir;
@@ -60,8 +60,8 @@ public class Script_executor {
 
 		Keywords_finder operation = new Keywords_finder(driver,log);
 		ReadObject object = new ReadObject();
-		scr=new ScreenshotsUtility();
-		//Fullscr = new TakeFullScreenCapture();
+		//scr=new ScreenshotsUtility();
+		Fullscr = new TakeFullScreenCapture();
 		allObjects =  object.getObjectRepository();
 
 		String InputFilepath=Filepath+Functionality+"/";
@@ -101,8 +101,8 @@ public class Script_executor {
 
 			String str = Teststep_sheet.getRow(i).toString();
 			Row row = Teststep_sheet.getRow(i);
-
-
+			
+			
 			String Keyword=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 1, i);
 			Object=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 2, i);
 			String ObjectType=Readexcel.getCellDataBySheetName(Teststep_sheet_name, 3, i);
@@ -126,8 +126,8 @@ public class Script_executor {
 				try {
 
 
-					scr.Screenshots(driver,ScreenshotsPath,Wrk);
-					//Fullscr.Screenshots(driver, ScreenshotsPath, Wrk);
+					//scr.Screenshots(driver,ScreenshotsPath,Wrk);
+					Fullscr.Screenshots(driver, ScreenshotsPath, Wrk);
 
 
 
@@ -148,8 +148,8 @@ public class Script_executor {
 
 		log.info("Execution Ended for testcase number : "+ Testcasenumber+" at time : " + dateFormat.format(date));
 
-		scr=null;
-		//Fullscr=null;
+		//scr=null;
+		Fullscr=null;
 
 	}
 
