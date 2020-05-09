@@ -204,7 +204,7 @@ public class Execute_MainScript {
 				//ieOptions.setCapability("nativeEvents",false);
 				//ieOptions.
 
-				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_64/IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 				webdriver=new InternetExplorerDriver(ieOptions);
 				webdriver.manage().window().maximize();
 
@@ -349,7 +349,7 @@ public void ExecuteTest(String Section,String Functionality,String Testcasenumbe
 				ieOptions.setCapability("requireWindowFocus", true);
 				ieOptions.setCapability("ignoreZoomSetting", true);
 
-				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_64/IEDriverServer.exe");
+				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 				webdriver=new InternetExplorerDriver(ieOptions);
 				webdriver.manage().window().maximize();
 				Testcasecounter=0;
