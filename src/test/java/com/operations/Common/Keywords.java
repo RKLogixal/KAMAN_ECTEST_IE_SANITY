@@ -160,7 +160,7 @@ public class Keywords {
 		} 
 		else{
 
-			test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
 			log.info("WebElement "+ objectName+" Not found..."  );
 			Assert.fail();
 
@@ -215,7 +215,7 @@ public class Keywords {
 		} 
 		else{
 
-			test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
 			log.info("WebElement "+ objectName+" Not found..."  );
 			Assert.fail();
 
@@ -287,7 +287,7 @@ public class Keywords {
 
 		else{
 
-			test.fail(MarkupHelper.createLabel("Test step Navigate URL Failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Test step Navigate URL Failed", ExtentColor.RED));
 			log.info("No URL Found...");
 		}
 	}
@@ -422,7 +422,7 @@ public class Keywords {
 		}
 		else{
 
-			test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
 			log.info("WebElement "+ objectName+" Not found..."  );
 			Assert.fail();
 
@@ -447,7 +447,7 @@ public class Keywords {
 		}
 		else{
 
-			test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Test step failed", ExtentColor.RED));
 			log.info("WebElement "+ objectName+" Not found..."  );
 			Assert.fail();
 
@@ -745,7 +745,7 @@ public class Keywords {
 
 			log.info("Actual price is not matching with expected price.Testcase Failed..!!!");
 			//logger.log(LogStatus.FAIL, "Test Step Failed");
-			test.fail(MarkupHelper.createLabel("Math verfication Failed", ExtentColor.RED));
+			//test.fail(MarkupHelper.createLabel("Math verfication Failed", ExtentColor.RED));
 
 		}
 

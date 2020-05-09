@@ -1,4 +1,4 @@
-package com.operations.Common;
+/*package com.operations.Common;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -73,12 +73,12 @@ public class FireClass_old {
 		test = extent.createTest(browser_name+"_"+Testcasenumber);	
 		test.fail(MarkupHelper.createLabel(failmsg,ExtentColor.RED));
 		
-		/*Actions Mouseaction = new Actions(webdriver);
+		Actions Mouseaction = new Actions(webdriver);
 		WebElement ele = webdriver.findElement(By.xpath("//div[text()='My Account']"));
 		Mouseaction.moveToElement(ele).build().perform();
 		webdriver.findElement(By.xpath("//*[@id='logout-button']")).click();
 		//test.fail(MarkupHelper.createLabel(Testcasenumber+" has been failed....", ExtentColor.RED));
-		*/Assert.fail(failmsg);
+		Assert.fail(failmsg);
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") +"/Browser_files/chromedriver_win32/chromedriver.exe");
 		//WebDriverManager.chromedriver().setup();
 		webdriver = new ChromeDriver();
@@ -112,3 +112,4 @@ public class FireClass_old {
 	}
 	
 }
+*/
