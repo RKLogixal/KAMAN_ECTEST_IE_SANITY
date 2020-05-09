@@ -202,7 +202,7 @@ public class Execute_MainScript {
 		if (Channel.equalsIgnoreCase("Desktop")) {
 
 
-			if (browser.equalsIgnoreCase("IE"))
+			if (browser.equalsIgnoreCase("IE11"))
 			{
 
 				InternetExplorerOptions ieOptions = new InternetExplorerOptions();
@@ -351,7 +351,7 @@ public class Execute_MainScript {
 
 		if(Executionmode.equalsIgnoreCase("Yes")){
 
-			if (browser.equalsIgnoreCase("IE")){
+			if (browser.equalsIgnoreCase("IE11")){
 
 				Testcasecounter = Testcasecounter + 1;
 
@@ -365,9 +365,9 @@ public class Execute_MainScript {
 					InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 					//ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 					ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
-					ieOptions.setCapability("requireWindowFocus", true);
+					/*ieOptions.setCapability("requireWindowFocus", true);
 					ieOptions.setCapability("ignoreZoomSetting", true);
-
+*/
 					System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 					webdriver=new InternetExplorerDriver(ieOptions);
 					webdriver.manage().window().maximize();
