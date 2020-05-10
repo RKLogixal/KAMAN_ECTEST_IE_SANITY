@@ -9,18 +9,7 @@
     <parameter name="DeviceScrHeight" value="812" />
     
     <classes>
-     <class name="com.testcases.driverscripts.Execute_MainScript"/>
-    </classes>
-	 </test> <!-- Test -->
-	   <test name="Chrome_test1">
-    <parameter name="browser" value="Chrome" />
-	 <parameter name="Channel" value="Desktop" />
-	  <parameter name="Device" value="iphone X" />
-     <parameter name="DeviceScrWidth" value="375" />
-    <parameter name="DeviceScrHeight" value="812" />
-    
-    <classes>
-     <class name="com.testcases.driverscripts.Execute_MainScript"/>
+     <class name="com.testcases.driverscripts.Closecon"/>
     </classes>
 	 </test> <!-- Test -->
       </suite> <!-- Suite -->

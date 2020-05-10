@@ -6,9 +6,11 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
+import org.openqa.selenium.Cookie;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -62,7 +64,7 @@ public class Execute_FailedScript {
 		int FailCounter = exMain.ExecutionRoundCounter;
 		FailCounter =  FailCounter+1;
 		FailRound="Round_"+FailCounter;
-		
+
 	}
 
 
@@ -89,7 +91,7 @@ public class Execute_FailedScript {
 
 				FailTestcasecounter = FailTestcasecounter + 1;
 
-				if (FailTestcasecounter==10) {
+				if (FailTestcasecounter==1) {
 
 					Execute_MainScript.webdriver.close();
 					Runtime rt = Runtime.getRuntime();
@@ -97,6 +99,7 @@ public class Execute_FailedScript {
 					rt.exec("taskkill /F /IM iexplore.exe");
 					Thread.sleep(2000);
 					InternetExplorerOptions ieOptions = new InternetExplorerOptions();
+					ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 					ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 					ieOptions.setCapability("requireWindowFocus", true);
 					ieOptions.setCapability("ignoreZoomSetting", true);
@@ -168,7 +171,31 @@ public class Execute_FailedScript {
 
 	}
 
+
 	@AfterMethod
+	public void deleteCookies() {
+
+		if(Execute_MainScript.browser.equalsIgnoreCase("chrome")) {
+			if (Executionmode.equalsIgnoreCase("Yes")) {
+				Set<Cookie> allCookies = Execute_MainScript.webdriver.manage().getCookies();
+				for (Cookie cookie : allCookies) {
+
+					String CookieName=cookie.getName();
+					//System.out.println(CookieName);
+					if (CookieName.equalsIgnoreCase("JSESSIONID") || CookieName.equalsIgnoreCase("com.kamandirect.LoggedInAccountCookie")) {
+
+						Execute_MainScript.webdriver.manage().deleteCookieNamed(CookieName);
+
+						System.out.println("Cookie : "+CookieName+" Successfully deleted...");
+					}
+
+				}
+
+			}
+		}
+	}
+
+	@AfterMethod(dependsOnMethods="deleteCookies")
 	public void TestResults(ITestResult result) throws IOException {
 		if (result.getStatus() == ITestResult.FAILURE) {
 
@@ -243,7 +270,7 @@ public class Execute_FailedScript {
 
 
 		}
-		else if(browser.equalsIgnoreCase("ie")){
+		else if(browser.equalsIgnoreCase("ie11")){
 			Execute_MainScript.webdriver.close();
 			Runtime rt = Runtime.getRuntime();
 			rt.exec("taskkill /F /IM IEDriverServer.exe");
