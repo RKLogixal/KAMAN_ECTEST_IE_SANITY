@@ -72,7 +72,7 @@ public class Execute_FailedScript {
 	@Test(priority =1 ,dataProvider = "Fetch_FailedTC_data",dataProviderClass=FailedTC_Master_data.class)
 	public void ExecuteFailedTC(String Section,String Functionality,String Testcasenumber, String Testcase_description , String Executionmode,String Severity) throws Throwable {
 
-		System.out.println("ReExecution of Failed testcases Started...");
+		System.out.println("ReExecution of Failed testcase "+Testcasenumber+ " Started...");
 
 		this.Testcasenumber=Testcasenumber;
 		this.Sitename=uc.SiteName;
@@ -87,7 +87,7 @@ public class Execute_FailedScript {
 
 		if(Executionmode.equalsIgnoreCase("Yes")){
 
-			if (Execute_MainScript.browser.equalsIgnoreCase("IE")){
+			if (Execute_MainScript.browser.equalsIgnoreCase("IE11")){
 
 				FailTestcasecounter = FailTestcasecounter + 1;
 
