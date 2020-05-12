@@ -17,16 +17,16 @@ import org.testng.annotations.Test;
 public class Closecon {
 
 
-	//public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException, InterruptedException {
 	// TODO Auto-generated method stub
-	@Test
-	public void Closeiedriver() throws IOException, InterruptedException {
+	//@Test
+	//public void Closeiedriver() throws IOException, InterruptedException {
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("taskkill /F /IM IEDriverServer.exe");
 		rt.exec("taskkill /F /IM iexplore.exe");
 		rt.exec("taskkill /F /IM chromedriver.exe");
 
-		WebDriver webdriver;
+		/*WebDriver webdriver;
 		InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 		ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 		ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
@@ -57,6 +57,6 @@ public class Closecon {
 		((JavascriptExecutor) webdriver).executeScript("document.getElementById('atg_store_createMyAccount').click()");
 		System.out.println("CLICKed 4");
 		Thread.sleep(5000);
-		System.out.println("Done");
+		System.out.println("Done");*/
 	}
 }
