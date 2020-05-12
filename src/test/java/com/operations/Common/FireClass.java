@@ -67,7 +67,7 @@ public class FireClass {
 
 	}
 
-	public void FailedTC_SeleniumExcpetions(String Object,Script_executor screxe,WebDriver webdriver,Xls_writer xls_writer,Map<Integer, Object[]> Testscase_failresults ,String browser_name, String Section,String Functionality,String Testcasenumber, 
+	public void FailedTC_SeleniumExcpetions(String Exception,String Object,Script_executor screxe,WebDriver webdriver,Xls_writer xls_writer,Map<Integer, Object[]> Testscase_failresults ,String browser_name, String Section,String Functionality,String Testcasenumber, 
 			String Testcase_description, String Executionmode,String Severity,SimpleDateFormat StartTime,Date Startdate,SoftAssert softAssert,ExtentTest test,ExtentReports extent,String ExecutionRound) throws Exception {
 
 		uc.getUserConfig();
@@ -88,7 +88,8 @@ public class FireClass {
 
 		softAssert.assertAll();
 
-		failmsg="NOT able to find element within given time frame...!!! Element name: " +"'" + Object + "." ;
+		//failmsg="NOT able to find element within given time frame...!!! Element name: " +"'" + Object + "." ;
+		failmsg=Exception;
 		//test = extent.createTest(browser_name+"_"+Testcasenumber);	
 		//test.fail(MarkupHelper.createLabel(failmsg,ExtentColor.RED));
 		//failcounter=failcounter+1;

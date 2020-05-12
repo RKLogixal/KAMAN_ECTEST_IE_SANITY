@@ -5,64 +5,58 @@ import java.util.Set;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Cookie;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.ie.InternetExplorerOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class Closecon {
 
 
-	public static void main(String[] args) throws IOException {
-		// TODO Auto-generated method stub
-		//	@Test
-		//public void Closeiedriver() throws IOException {
+	//public static void main(String[] args) throws IOException, InterruptedException {
+	// TODO Auto-generated method stub
+	@Test
+	public void Closeiedriver() throws IOException, InterruptedException {
 		Runtime rt = Runtime.getRuntime();
 		rt.exec("taskkill /F /IM IEDriverServer.exe");
 		rt.exec("taskkill /F /IM iexplore.exe");
 		rt.exec("taskkill /F /IM chromedriver.exe");
 
-		//System.out.println("Your first argument is: "+args[0]);  
-		//System.out.println("java Progs");
-
-		/*WebDriver webdriver;
+		WebDriver webdriver;
 		InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 		ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 		ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
 		ieOptions.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
-		//ieOptions.setCapability(InternetExplorerDriver.UNEXPECTED_ALERT_BEHAVIOR, false);
-		ieOptions.setCapability("requireWindowFocus", true);
-		ieOptions.setCapability("ignoreZoomSetting", true);
-		//ieOptions.setCapability("nativeEvents",false);
-		//ieOptions.
-
 		System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 		webdriver=new InternetExplorerDriver(ieOptions);
 		webdriver.manage().window().maximize();
-		webdriver.get("https://ectest.kamandirect.com/storeus/");
-		webdriver.findElement(By.xpath("//*[@id='atg_store_locale']/div/ul/li[1]/a")).click();
-		webdriver.findElement(By.xpath("//*[@id='login-nav']/span[2]/a")).click();
-		webdriver.findElement(By.xpath("//*[@id='atg_store_registerLoginEmailAddress1']")).sendKeys("bep-dvlp@kdgcorp.com");
-		webdriver.findElement(By.xpath("//*[@id='atg_store_registerLoginPassword1']")).sendKeys("bep999");
-		webdriver.findElement(By.xpath("//*[@id='atg_store_loginButton1']")).click();
-		webdriver.findElement(By.xpath("//*[@id='atg_store_locale']/div/ul/li[2]/a")).click();
-
-		Set<Cookie> allCookies = webdriver.manage().getCookies();
-		for (Cookie cookie : allCookies) {
-
-			String CookieName=cookie.getName();
-			System.out.println(CookieName);
-			if (CookieName.equalsIgnoreCase("JSESSIONID") || CookieName.equalsIgnoreCase("com.kamandirect.LoggedInAccountCookie")) {
-
-				webdriver.manage().deleteCookieNamed(CookieName);
-
-				System.out.println("Cookie : "+CookieName+" Successfully deleted...");
-			}
-			System.out.println("Done");
-
-		}
-
-		webdriver.get("https://ectest.kamandirect.com/storeus/");
-	}*/
+		webdriver.get("https://ec.kamandirect.com/storeus/myaccount/registration.jsp");
+		JavascriptExecutor jse = (JavascriptExecutor) webdriver;
+		jse.executeScript("window.scrollBy(0,500)", "");
+		Thread.sleep(5000);
+		WebDriverWait myWaitVar = new WebDriverWait(webdriver,20);
+		WebElement radioBtn2 = webdriver.findElement(By.id("ctmNotRequested"));
+		((JavascriptExecutor) webdriver).executeScript("arguments[0].checked = true;", radioBtn2);
+		System.out.println("CLICKed 1");
+		Thread.sleep(5000);
+		System.out.println("CLICK 2 Started..");
+		WebElement radioBtn1 = webdriver.findElement(By.id("indiRadio"));
+		((JavascriptExecutor) webdriver).executeScript("arguments[0].checked = true;", radioBtn1);
+		System.out.println("CLICKed 2");
+		Thread.sleep(5000);
+		System.out.println("CLICK 3 Started...");
+		((JavascriptExecutor) webdriver).executeScript("document.getElementById('regCheckbox').click()");
+		Thread.sleep(5000);
+		System.out.println("CLICKed 3");
+		Thread.sleep(5000);
+		System.out.println("CLICK 4 Started...");
+		((JavascriptExecutor) webdriver).executeScript("document.getElementById('atg_store_createMyAccount').click()");
+		System.out.println("CLICKed 4");
+		Thread.sleep(5000);
+		System.out.println("Done");
 	}
 }

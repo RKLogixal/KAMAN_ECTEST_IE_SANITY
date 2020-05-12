@@ -131,7 +131,7 @@ public class Execute_FailedScript {
 				Execute_MainScript.Applog.error(exMain.stack.toString());
 				exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
 				exMain.test.fail(MarkupHelper.createLabel(FireClass.failmsg,ExtentColor.RED));
-				exMain.FC.FailedTC_SeleniumExcpetions(Testcase_description, exMain.screxe, Execute_MainScript.webdriver, exMain.xls_writer, exMain.Testscase_failresults, Execute_MainScript.browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, Execute_MainScript.StartTime, Execute_MainScript.Startdate, exMain.softAssert,exMain.test, Execute_MainScript.extent,FailRound);
+				exMain.FC.FailedTC_SeleniumExcpetions(exMain.stack.toString(),Testcase_description, exMain.screxe, Execute_MainScript.webdriver, exMain.xls_writer, exMain.Testscase_failresults, Execute_MainScript.browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, Execute_MainScript.StartTime, Execute_MainScript.Startdate, exMain.softAssert,exMain.test, Execute_MainScript.extent,FailRound);
 
 			}
 
@@ -141,7 +141,7 @@ public class Execute_FailedScript {
 				Execute_MainScript.Applog.error(exMain.stack.toString());
 				exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
 				exMain.test.fail(MarkupHelper.createLabel(FireClass.failmsg,ExtentColor.RED));
-				exMain.FC.FailedTC_SeleniumExcpetions(Testcase_description, exMain.screxe, Execute_MainScript.webdriver, exMain.xls_writer, exMain.Testscase_failresults, Execute_MainScript.browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, Execute_MainScript.StartTime, Execute_MainScript.Startdate, exMain.softAssert, exMain.test, Execute_MainScript.extent,FailRound);
+				exMain.FC.FailedTC_SeleniumExcpetions(exMain.stack.toString(),Testcase_description, exMain.screxe, Execute_MainScript.webdriver, exMain.xls_writer, exMain.Testscase_failresults, Execute_MainScript.browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, Execute_MainScript.StartTime, Execute_MainScript.Startdate, exMain.softAssert, exMain.test, Execute_MainScript.extent,FailRound);
 
 			}
 			catch(Exception e) {

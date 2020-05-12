@@ -416,7 +416,7 @@ public class Execute_MainScript {
 
 				Te.printStackTrace(new PrintWriter(stack));
 				Applog.error(stack.toString());
-				FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+				FC.FailedTC_SeleniumExcpetions(stack.toString(),Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
 
 			}
 
@@ -424,7 +424,7 @@ public class Execute_MainScript {
 
 				Nse.printStackTrace(new PrintWriter(stack));
 				Applog.error(stack.toString());
-				FC.FailedTC_SeleniumExcpetions(Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
+				FC.FailedTC_SeleniumExcpetions(stack.toString(),Testcase_description, screxe, webdriver, xls_writer, Testscase_failresults, browser,Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity, StartTime, Startdate, softAssert, test, extent,ExecutionRound);
 
 			}
 			catch(Exception e) {
