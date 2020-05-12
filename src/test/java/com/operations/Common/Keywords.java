@@ -141,6 +141,7 @@ public class Keywords {
 
 
 		WebDriverWait myWaitVar = new WebDriverWait(driver,20);
+		System.out.println("Clicking on element : "+ objectName);
 		myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p, objectName, objectType)));
 
 		//waitForPageLoadComplete(driver, 10);
@@ -151,9 +152,10 @@ public class Keywords {
 
 			synchronized (LOCK) {
 				LOCK.wait(5000);
+
 				//	driver.manage().timeouts().implicitlyWait(5,TimeUnit.SECONDS) ;
 				driver.findElement(this.getObject(p, objectName, objectType)).click();
-
+				System.out.println("Clicked element : "+ objectName);
 				//test.pass(MarkupHelper.createLabel("Test step passed", ExtentColor.GREEN));
 				log.info("WebElement "+ objectName+" Successfully identified"  );
 			}
@@ -222,6 +224,52 @@ public class Keywords {
 		}
 	}
 
+	public void CLICK_JS(WebDriver driver,Properties p,String objectName,String objectType,String elementtype , ExtentTest test,Logger log) throws Exception{
+		WebDriverWait myWaitVar = new WebDriverWait(driver,20);
+
+
+		if (elementtype.equalsIgnoreCase("RadioButton")) {
+
+			WebElement radioBtn2 = driver.findElement(this.getObject(p, objectName, objectType));
+			((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", radioBtn2);
+			System.out.println("CLICKed on JS element : "+objectName);
+			System.out.println("The Radio button is selection state is - " + radioBtn2.isSelected());
+		}
+		else if (elementtype.equalsIgnoreCase("CheckBox")) {
+
+			if (objectType.equalsIgnoreCase("ID")) {
+				WebElement checkbox = driver.findElement(By.id("regCheckbox"));
+				JavascriptExecutor js = (JavascriptExecutor) driver;  
+				System.out.println("Starting with Checkbox click...");
+				//js.executeScript("arguments[0].click();", checkbox);
+				js.executeScript("document.getElementById('regCheckbox').checked=true;");
+				System.out.println("The checkbox is selection state is - " + checkbox.isSelected());
+
+			}
+
+		}
+		else if (elementtype.equalsIgnoreCase("Button")) {
+
+			if (objectType.equalsIgnoreCase("ID")) {
+				
+				JavascriptExecutor js = (JavascriptExecutor) driver;  
+				WebElement elmnt =driver.findElement(By.id("atg_store_createMyAccount"));  
+				System.out.println("The visibility of button - " + elmnt.isDisplayed());
+				System.out.println("The Enability of button - " + elmnt.isEnabled());
+				System.out.println("Starting with Button click 2nd way ...");
+				js.executeScript("arguments[0].removeAttribute('disabled','disabled')", elmnt);
+				System.out.println("The after Enability of button - " + elmnt.isEnabled());
+				js.executeScript("arguments[0].click();", elmnt);
+				System.out.println("Button clicked...");
+				
+			}
+		
+		}
+
+		
+
+	}
+
 	public void VERIFY_PAGE_URL(WebDriver driver,String value,ExtentTest test,Logger log) throws NoSuchFieldException {
 
 		String url = driver.getCurrentUrl();
@@ -263,9 +311,10 @@ public class Keywords {
 				{
 					if (key.equalsIgnoreCase(ActualValue)) {
 
-					//	System.out.println(map.get(key));
+						//	System.out.println(map.get(key));
 						driver.get(map.get(key));	
 						log.info("Successfully navigated to URL : " + map.get(key) );
+						System.out.println("Successfully navigated to URL : " + map.get(key) );
 
 
 					}
@@ -279,7 +328,7 @@ public class Keywords {
 
 				Thread.sleep(3000);
 
-				log.info("Successfully navigated to URL : " + value );
+				System.out.println("Successfully navigated to URL : " + value );
 
 			}
 
@@ -321,6 +370,7 @@ public class Keywords {
 
 						//System.out.println(map.get(key));
 						driver.findElement(this.getObject(p,objectName,objectType)).sendKeys(map.get(key));
+						System.out.println("Entering text on : " + objectName);
 						log.info("Successfully Entered text into Element objectName : " + map.get(key) );
 						//System.out.println(map.get(key));
 
@@ -330,10 +380,11 @@ public class Keywords {
 				}
 			}
 			else {
+				System.out.println("Entering text on : " + objectName);
 				driver.findElement(this.getObject(p,objectName,objectType)).sendKeys(value);
 			}
 		}
-		
+
 	}
 
 
@@ -434,11 +485,13 @@ public class Keywords {
 
 
 		WebDriverWait myWaitmouseClick = new WebDriverWait(driver,20);
+		System.out.println("Mouseover Clicking on element : "+ objectName);
 		myWaitmouseClick.until(ExpectedConditions.elementToBeClickable(this.getObject(p,objectName,objectType)));
 		Boolean MOUSEOVER_CLICK = driver.findElement(this.getObject(p, objectName, objectType)).isDisplayed();
 		if (MOUSEOVER_CLICK.booleanValue()==true){
 
 			Actions MouseactionC = new Actions(driver);
+			System.out.println("Mouseover Clicking on element XYZ : "+ objectName);
 			WebElement eleC = driver.findElement(this.getObject(p,objectName,objectType));
 			MouseactionC.moveToElement(eleC).click().perform();
 
@@ -467,36 +520,36 @@ public class Keywords {
 			for(int i =0;i<=ELELIST.size();i++)
 			{
 				if (value.equalsIgnoreCase("CLICK")) {
-					
+
 					ELELIST.get(0).click();
 				}
-				
+
 				else if ((value.equalsIgnoreCase("VERIFY"))){
-					
+
 					Boolean ELEVERIFY= ELELIST.get(0).isDisplayed();
-					
+
 					if ((ELEVERIFY.booleanValue()!=true))	{
 
 						Assert.fail("Element visibily Mismatched with Expected result..!!!!!!");
 
 					}
 				}
-				
+
 			}
-			
+
 		}
-		
+
 		else {
-			
+
 			Assert.fail(objectName + " Element Not found ..!!!!!!");
-			
+
 		}
 	}
-	
-		
 
-	
-	
+
+
+
+
 	public void CLEAR_CART_ITEMS(WebDriver driver,Properties p,String objectName,String objectType,String value,ExtentTest test,Logger log) throws Exception {
 		//WebDriverWait myWaitVar = new WebDriverWait(driver,20);
 
@@ -787,9 +840,9 @@ public class Keywords {
 			}	
 
 			else {
-				Assert.fail("TEXT : "+value+" Which you are looking for Webelement "+objectName+" NOT found...!!!!");
+				Assert.fail("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
 				//test.fail("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!");
-				throw new NoSuchFieldException("TEXT : "+value+" Which you are looking for Webelement "+objectName+" NOT found...!!!!");
+				throw new NoSuchFieldException("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
 
 			}
 
@@ -843,7 +896,9 @@ public class Keywords {
 
 		//WebDriverWait wait = new WebDriverWait(driver, 100);
 		//driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS) ;
+		System.out.println("waiting for 5 secs...");
 		Thread.sleep(5000);
+
 
 	}
 

@@ -68,6 +68,12 @@ public class Keywords_finder {
 			key.CLICK_PRE_ENTERTEXT(driver, p, objectName, objectType,test,log);
 
 			break;
+			
+		case "CLICK_JS":
+
+			key.CLICK_JS(driver, p, objectName, objectType,value,test,log);
+
+			break;
 
 		case "PRESS_ENTER" :
 
