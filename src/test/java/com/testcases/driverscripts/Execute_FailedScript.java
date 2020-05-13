@@ -101,8 +101,8 @@ public class Execute_FailedScript {
 					InternetExplorerOptions ieOptions = new InternetExplorerOptions();
 					ieOptions.setCapability(InternetExplorerDriver.IE_ENSURE_CLEAN_SESSION, true);
 					ieOptions.setCapability(InternetExplorerDriver.ENABLE_PERSISTENT_HOVERING, false);
-					ieOptions.setCapability("requireWindowFocus", true);
-					ieOptions.setCapability("ignoreZoomSetting", true);
+					//ieOptions.setCapability("requireWindowFocus", true);
+					//ieOptions.setCapability("ignoreZoomSetting", true);
 
 					System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 					Execute_MainScript.webdriver=new InternetExplorerDriver(ieOptions);
