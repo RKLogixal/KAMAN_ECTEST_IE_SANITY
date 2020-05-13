@@ -110,7 +110,7 @@ public class FailedTC_Master_data {
 		FireClass FC = new FireClass();
 		Execute_MainScript EM = new Execute_MainScript();
 
-		String FailedFilePath=FC.FailedsheetPath;
+		String FailedFilePath=EM.FailedsheetPath;
 		System.out.println("");
 		//String FailedFilePath="D:\\ROhit\\Rohit\\Automation\\Demo\\KAMAN_ReExecuteFailedTcs\\KAMAN_ECTEST_IE_SANITY\\Failed_Reports\\2020-05-06_19-53-29\\Kaman\\IE";
 
