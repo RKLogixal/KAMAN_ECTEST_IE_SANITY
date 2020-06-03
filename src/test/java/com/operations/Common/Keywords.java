@@ -229,21 +229,24 @@ public class Keywords {
 
 
 		if (elementtype.equalsIgnoreCase("RadioButton")) {
-
-			WebElement radioBtn2 = driver.findElement(this.getObject(p, objectName, objectType));
+			String sss = p.getProperty(objectName);
+			System.out.println(sss);
+			WebElement radioBtn2 =driver.findElement(By.id(p.getProperty(objectName)));
+			//WebElement radioBtn2 = driver.findElement(this.getObject(p, objectName, objectType));
 			((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", radioBtn2);
 			System.out.println("CLICKed on JS element : "+objectName);
-			System.out.println("The Radio button is selection state is - " + radioBtn2.isSelected());
+			System.out.println("The Radio button :"+objectName+" is selection state is - " + radioBtn2.isSelected());
 		}
 		else if (elementtype.equalsIgnoreCase("CheckBox")) {
 
 			if (objectType.equalsIgnoreCase("ID")) {
-				WebElement checkbox = driver.findElement(By.id("regCheckbox"));
+				String CheckID=p.getProperty(objectName);
+				WebElement checkbox = driver.findElement(By.id(p.getProperty(objectName)));
 				JavascriptExecutor js = (JavascriptExecutor) driver;  
 				System.out.println("Starting with Checkbox click...");
 				//js.executeScript("arguments[0].click();", checkbox);
-				js.executeScript("document.getElementById('regCheckbox').checked=true;");
-				System.out.println("The checkbox is selection state is - " + checkbox.isSelected());
+				js.executeScript("document.getElementById('"+CheckID+"').checked=true;");
+				System.out.println("The checkbox :"+objectName+" is selection state is - " + checkbox.isSelected());
 
 			}
 
@@ -253,7 +256,7 @@ public class Keywords {
 			if (objectType.equalsIgnoreCase("ID")) {
 				
 				JavascriptExecutor js = (JavascriptExecutor) driver;  
-				WebElement elmnt =driver.findElement(By.id("atg_store_createMyAccount"));  
+				WebElement elmnt =driver.findElement(By.id(p.getProperty(objectName)));  
 				System.out.println("The visibility of button - " + elmnt.isDisplayed());
 				System.out.println("The Enability of button - " + elmnt.isEnabled());
 				System.out.println("Starting with Button click 2nd way ...");
