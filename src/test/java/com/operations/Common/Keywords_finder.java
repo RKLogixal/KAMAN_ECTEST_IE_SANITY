@@ -175,6 +175,12 @@ public class Keywords_finder {
 			key.WAIT(driver);
 
 			break;
+			
+		case "LONGWAIT":
+
+			key.LONGWAIT(driver);
+
+			break;
 
 		case "SLEEPWAIT":
 
