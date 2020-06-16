@@ -855,6 +855,7 @@ public class Keywords {
 			// TODO Auto-generated catch block
 			//test.fail(MarkupHelper.createLabel("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!", ExtentColor.RED));
 			log.error("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!");
+			Assert.fail("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!");
 			//log.error(e.printStackTrace());
 		}
 
@@ -901,6 +902,16 @@ public class Keywords {
 		//driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS) ;
 		System.out.println("waiting for 5 secs...");
 		Thread.sleep(5000);
+
+
+	}
+
+	public void LONGWAIT(WebDriver driver) throws InterruptedException{
+
+		//WebDriverWait wait = new WebDriverWait(driver, 100);
+		//driver.manage().timeouts().implicitlyWait(20,TimeUnit.SECONDS) ;
+		System.out.println("waiting for 60 secs...");
+		Thread.sleep(60000);
 
 
 	}
