@@ -12,8 +12,9 @@ public class ReadObject {
 	
 	public Properties getObjectRepository() throws IOException{
 		//Read object repository file
-		InputStream stream = new FileInputStream(new File(System.getProperty("user.dir")+"\\resources\\CSSLocators.properties"));
+		InputStream stream = new FileInputStream(new File(System.getProperty("user.dir")+"\\resources\\CSSLocators_UpdatedUI.properties"));
 		//load all objects
+		p1.clear();
 		p1.load(stream);
 		return p1;
 	}

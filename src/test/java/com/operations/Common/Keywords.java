@@ -35,6 +35,7 @@ import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.events.EventFiringWebDriver;
 import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
@@ -254,7 +255,7 @@ public class Keywords {
 		else if (elementtype.equalsIgnoreCase("Button")) {
 
 			if (objectType.equalsIgnoreCase("ID")) {
-				
+
 				JavascriptExecutor js = (JavascriptExecutor) driver;  
 				WebElement elmnt =driver.findElement(By.id(p.getProperty(objectName)));  
 				System.out.println("The visibility of button - " + elmnt.isDisplayed());
@@ -264,12 +265,12 @@ public class Keywords {
 				System.out.println("The after Enability of button - " + elmnt.isEnabled());
 				js.executeScript("arguments[0].click();", elmnt);
 				System.out.println("Button clicked...");
-				
+
 			}
-		
+
 		}
 
-		
+
 
 	}
 
@@ -483,6 +484,53 @@ public class Keywords {
 		}
 
 	}
+
+	public void TINY_SCROLL_DOWN(WebDriver driver,ExtentTest test,Logger log) throws Exception {
+
+		JavascriptExecutor jse = (JavascriptExecutor) driver;
+		//jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+		jse.executeScript("window.scrollBy(0,250)", "");
+
+	}
+
+	public void SCROLL_WEBELEMENT(WebDriver driver,ExtentTest test,Logger log,Properties p,String objectName) throws Exception {
+		EventFiringWebDriver evt = new EventFiringWebDriver(driver);
+		String element = p.getProperty(objectName);
+		evt.executeScript("document.querySelector('"+element+"').scrollTop=700");
+		JavascriptExecutor jse_UP = (JavascriptExecutor) driver;
+		jse_UP.executeScript("window.scrollTo(500,0)", "");
+
+	}
+	
+	public void VERIFY_ATTRIBUTE_VALUE(WebDriver driver,Properties p,String objectName,String objectType,ExtentTest test,Logger log,String value) throws Exception{
+
+		if (value.contains(":")){
+			String[] Attrparts = value.split(":", 2);
+
+			String GetAttr;
+			WebDriverWait myWaitVar = new WebDriverWait(driver,20);
+			myWaitVar.until(ExpectedConditions.visibilityOfElementLocated(this.getObject(p, objectName, objectType)));
+			GetAttr = driver.findElement(this.getObject(p,objectName,objectType)).getAttribute(Attrparts[0]);
+			if (GetAttr.equalsIgnoreCase(Attrparts[1]))	{
+				//test.pass(MarkupHelper.createLabel("TEXT : "+value+"Which you are looking for Webelement "+objectName+" has been found successfully..." , ExtentColor.GREEN));
+				log.info("Attribute value : "+value+"Which you are looking for Webelement "+objectName+" has been found successfully...");
+
+			}	
+
+			else {
+				Assert.fail("Expected TEXT : "+Attrparts[1]+" Mismatched with actual text "+GetAttr+"...!!!!");
+				//test.fail("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!");
+				//throw new NoSuchFieldException("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
+
+			}
+		}
+
+		else {
+
+			throw new NoSuchFieldException("Please specify Attribute with its expected value in the format of (Attribute:value)...!!!!");
+		}
+
+	}	
 
 	public void MOUSEOVER_CLICK(WebDriver driver,Properties p,String objectName,String objectType,String value,ExtentTest test,Logger log) throws Exception {
 

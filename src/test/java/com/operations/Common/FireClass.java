@@ -42,7 +42,7 @@ public class FireClass {
 	int Fcoln = 1;
 	//public static int failcounter;
 	Map<Object, Object[]> listOfFailedTCsMap  = new LinkedHashMap<Object, Object[]>();
-	public static String FailedsheetPath;
+	//public static String FailedsheetPath;
 
 
 
@@ -74,7 +74,7 @@ public class FireClass {
 
 		Object=screxe.Object;
 		//VerifyUserLoginforLogout(webdriver);
-		FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/"+ExecutionRound;
+		//FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/"+ExecutionRound;
 
 		if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
 
@@ -115,7 +115,7 @@ public class FireClass {
 		Object=screxe.Object;
 		//VerifyUserLoginforLogout(webdriver);
 
-		FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/"+ExecutionRound;
+		//FailedsheetPath=System.getProperty("user.dir")+Constants.Windows_FailedFileLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/"+ExecutionRound;
 		if(uc.ExcelReports.equalsIgnoreCase("Yes")) {
 
 			///xls_writer.GenerateFailReport(Testscase_failresults, Section, Functionality, Testcasenumber,Testcase_description,Executionmode, Severity,FailedsheetPath,ExecutionRound);
