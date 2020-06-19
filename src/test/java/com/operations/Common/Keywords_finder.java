@@ -68,7 +68,7 @@ public class Keywords_finder {
 			key.CLICK_PRE_ENTERTEXT(driver, p, objectName, objectType,test,log);
 
 			break;
-			
+
 		case "CLICK_JS":
 
 			key.CLICK_JS(driver, p, objectName, objectType,value,test,log);
@@ -175,7 +175,7 @@ public class Keywords_finder {
 			key.WAIT(driver);
 
 			break;
-			
+
 		case "LONGWAIT":
 
 			key.LONGWAIT(driver);
@@ -230,6 +230,8 @@ public class Keywords_finder {
 			key.VERIFY_WEBELEMENT_PRESENT(driver, p, objectName, objectType,value);
 
 			break;
+
+
 
 		case "ELEMENT_FROM_LIST":
 
@@ -292,6 +294,19 @@ public class Keywords_finder {
 			key.SCROLL_DOWN(driver, test, log);
 
 			break;
+
+		case "TINY_SCROLL_DOWN":
+
+			key.TINY_SCROLL_DOWN(driver, test, log);
+
+			break;
+
+		case "SCROLL_WEBELEMENT":
+
+			key.SCROLL_WEBELEMENT(driver, test, log, p, objectName);
+
+			break;
+
 
 		case "RADIO_BUTTON_SELECT" :
 			List<WebElement> radiolist = driver.findElements(By.xpath(".//input[contains(@type,'radio')]"));	
