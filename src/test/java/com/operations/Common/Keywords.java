@@ -106,7 +106,18 @@ public class Keywords {
 		}
 	}
 
+	public String getJSObject(Properties p,String objectName,String objectType) throws Exception {
+		if(objectType.equalsIgnoreCase("JS_ID")){
 
+			System.out.println("document.getElementById('"+p.getProperty(objectName)+"').click()");
+			return "document.getElementById('"+p.getProperty(objectName)+"').click()";
+
+		}
+		else {
+			throw new Exception("Wrong JS object type");
+		}
+
+	}
 	public Map<String, String> GetAppData(String filePath) throws Exception {
 
 		String line;
@@ -229,51 +240,63 @@ public class Keywords {
 		WebDriverWait myWaitVar = new WebDriverWait(driver,20);
 
 
-		if (elementtype.equalsIgnoreCase("RadioButton")) {
-			String sss = p.getProperty(objectName);
-			System.out.println(sss);
-			WebElement radioBtn2 =driver.findElement(By.id(p.getProperty(objectName)));
-			//WebElement radioBtn2 = driver.findElement(this.getObject(p, objectName, objectType));
-			((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", radioBtn2);
-			System.out.println("CLICKed on JS element : "+objectName);
-			System.out.println("The Radio button :"+objectName+" is selection state is - " + radioBtn2.isSelected());
-		}
-		else if (elementtype.equalsIgnoreCase("CheckBox")) {
+		if (!(elementtype==null)) {
 
-			if (objectType.equalsIgnoreCase("ID")) {
-				String CheckID=p.getProperty(objectName);
-				WebElement checkbox = driver.findElement(By.id(p.getProperty(objectName)));
-				JavascriptExecutor js = (JavascriptExecutor) driver;  
-				System.out.println("Starting with Checkbox click...");
-				//js.executeScript("arguments[0].click();", checkbox);
-				js.executeScript("document.getElementById('"+CheckID+"').checked=true;");
-				System.out.println("The checkbox :"+objectName+" is selection state is - " + checkbox.isSelected());
+			if (elementtype.equalsIgnoreCase("RadioButton")) {
+
+				WebElement radioBtn2 = driver.findElement(this.getObject(p, objectName, objectType));
+				((JavascriptExecutor) driver).executeScript("arguments[0].checked = true;", radioBtn2);
+				System.out.println("CLICKed on JS element : "+objectName);
+				System.out.println("The Radio button is selection state is - " + radioBtn2.isSelected());
+			}
+			else if (elementtype.equalsIgnoreCase("CheckBox")) {
+
+				if (objectType.equalsIgnoreCase("ID")) {
+					WebElement checkbox = driver.findElement(By.id("regCheckbox"));
+					JavascriptExecutor js = (JavascriptExecutor) driver;  
+					System.out.println("Starting with Checkbox click...");
+					//js.executeScript("arguments[0].click();", checkbox);
+					js.executeScript("document.getElementById('regCheckbox').checked=true;");
+					System.out.println("The checkbox is selection state is - " + checkbox.isSelected());
+
+				}
+
+			}
+			else if (elementtype.equalsIgnoreCase("Button")) {
+
+				if (objectType.equalsIgnoreCase("ID")) {
+
+					JavascriptExecutor js = (JavascriptExecutor) driver;  
+					WebElement elmnt =driver.findElement(By.id("atg_store_createMyAccount"));  
+					System.out.println("The visibility of button - " + elmnt.isDisplayed());
+					System.out.println("The Enability of button - " + elmnt.isEnabled());
+					System.out.println("Starting with Button click 2nd way ...");
+					js.executeScript("arguments[0].removeAttribute('disabled','disabled')", elmnt);
+					System.out.println("The after Enability of button - " + elmnt.isEnabled());
+					js.executeScript("arguments[0].click();", elmnt);
+					System.out.println("Button clicked...");
+
+				}
+			}
+			else if (elementtype.equalsIgnoreCase("JSElement")) {
+
+				if (objectType.equalsIgnoreCase("JS_ID")) {
+					((JavascriptExecutor) driver).executeScript(this.getJSObject(p, objectName, objectType));
+					System.out.println("CLicked on JSElement : " + objectName);
+
+				}
+
 
 			}
 
 		}
-		else if (elementtype.equalsIgnoreCase("Button")) {
 
-			if (objectType.equalsIgnoreCase("ID")) {
+		else {
 
-				JavascriptExecutor js = (JavascriptExecutor) driver;  
-				WebElement elmnt =driver.findElement(By.id(p.getProperty(objectName)));  
-				System.out.println("The visibility of button - " + elmnt.isDisplayed());
-				System.out.println("The Enability of button - " + elmnt.isEnabled());
-				System.out.println("Starting with Button click 2nd way ...");
-				js.executeScript("arguments[0].removeAttribute('disabled','disabled')", elmnt);
-				System.out.println("The after Enability of button - " + elmnt.isEnabled());
-				js.executeScript("arguments[0].click();", elmnt);
-				System.out.println("Button clicked...");
-
-			}
-
+			throw new Exception("Please specify JSElement type...!!!");
 		}
-
-
-
 	}
-
+	
 	public void VERIFY_PAGE_URL(WebDriver driver,String value,ExtentTest test,Logger log) throws NoSuchFieldException {
 
 		String url = driver.getCurrentUrl();
@@ -501,7 +524,7 @@ public class Keywords {
 		jse_UP.executeScript("window.scrollTo(500,0)", "");
 
 	}
-	
+
 	public void VERIFY_ATTRIBUTE_VALUE(WebDriver driver,Properties p,String objectName,String objectType,ExtentTest test,Logger log,String value) throws Exception{
 
 		if (value.contains(":")){
