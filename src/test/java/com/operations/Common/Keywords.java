@@ -519,7 +519,7 @@ public class Keywords {
 	public void SCROLL_WEBELEMENT(WebDriver driver,ExtentTest test,Logger log,Properties p,String objectName) throws Exception {
 		EventFiringWebDriver evt = new EventFiringWebDriver(driver);
 		String element = p.getProperty(objectName);
-		evt.executeScript("document.querySelector('"+element+"').scrollTop=700");
+		evt.executeScript("document.querySelector('"+element+"').scrollTop=1000");
 		JavascriptExecutor jse_UP = (JavascriptExecutor) driver;
 		jse_UP.executeScript("window.scrollTo(500,0)", "");
 
@@ -916,7 +916,7 @@ public class Keywords {
 			else {
 				Assert.fail("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
 				//test.fail("TEXT : "+value+"Which you are looking for Webelement"+objectName+"NOT found...!!!!");
-				throw new NoSuchFieldException("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
+				//throw new NoSuchFieldException("Expected TEXT : "+value+" Mismatched with actual text "+Gettext+"...!!!!");
 
 			}
 
