@@ -113,6 +113,12 @@ public class Keywords {
 			return "document.getElementById('"+p.getProperty(objectName)+"').click()";
 
 		}
+		else if(objectType.equalsIgnoreCase("JS_NAME")){
+
+			System.out.println("document.getElementsByName('"+p.getProperty(objectName)+"').click()");
+			return "document.getElementsByName('"+p.getProperty(objectName)+"').click()";
+
+		}
 		else {
 			throw new Exception("Wrong JS object type");
 		}
@@ -249,6 +255,15 @@ public class Keywords {
 				System.out.println("CLICKed on JS element : "+objectName);
 				System.out.println("The Radio button is selection state is - " + radioBtn2.isSelected());
 			}
+			
+			else if (elementtype.equalsIgnoreCase("LINK")) {
+
+				WebElement LinkObj = driver.findElement(this.getObject(p, objectName, objectType));
+				((JavascriptExecutor) driver).executeScript("arguments[0].click();", LinkObj);
+				System.out.println("CLICKed on JS element : "+objectName);
+				//System.out.println("The Radio button is selection state is - " + LinkObj.isSelected());
+			}
+			
 			else if (elementtype.equalsIgnoreCase("CheckBox")) {
 
 				if (objectType.equalsIgnoreCase("ID")) {
@@ -277,6 +292,8 @@ public class Keywords {
 					System.out.println("Button clicked...");
 
 				}
+				
+				
 			}
 			else if (elementtype.equalsIgnoreCase("JSElement")) {
 
@@ -285,7 +302,11 @@ public class Keywords {
 					System.out.println("CLicked on JSElement : " + objectName);
 
 				}
+				else if (objectType.equalsIgnoreCase("JS_NAME")) {
+					((JavascriptExecutor) driver).executeScript(this.getJSObject(p, objectName, objectType));
+					System.out.println("CLicked on JSElement : " + objectName);
 
+				}
 
 			}
 
@@ -296,7 +317,7 @@ public class Keywords {
 			throw new Exception("Please specify JSElement type...!!!");
 		}
 	}
-	
+
 	public void VERIFY_PAGE_URL(WebDriver driver,String value,ExtentTest test,Logger log) throws NoSuchFieldException {
 
 		String url = driver.getCurrentUrl();
