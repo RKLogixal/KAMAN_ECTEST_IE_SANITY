@@ -107,7 +107,7 @@ public class Execute_FailedScript {
 					System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") +"/Browser_files/IEDriverServer_Win32_3.150.1/IEDriverServer.exe");
 					Execute_MainScript.webdriver=new InternetExplorerDriver(ieOptions);
 					Execute_MainScript.webdriver.manage().window().maximize();
-					exMain.Testcasecounter=0;
+					FailTestcasecounter=0;
 				}
 
 			}
