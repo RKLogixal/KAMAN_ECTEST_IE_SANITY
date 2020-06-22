@@ -85,7 +85,9 @@ public class CreateExecutionStatusHTMLfile {
 				+ "<td>"+failcount+"</td>"
 				+ "<td>"+skipcount+"</td></tr></tbody></table>"
 				+ "<br />"+"<br />"+"<br />"+"<br />"+"<br />"+"<br />"
-				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />"+"<br />";
+				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />"+"<br />"
+				+"<b>NOTE: We have disabled 2 testcases related to Contact Us Page (https://ectest.kamandirect.com/storeus/Kaman-locations) from today's Sanity run due to functional issues.</b>";
+				
 
 		writer.write(mailBOdy);
 		writer.close();
