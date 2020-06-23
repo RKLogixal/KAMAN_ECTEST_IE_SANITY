@@ -7,6 +7,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import com.operations.Common.FireClass;
+import com.operations.Common.ReadStats;
 import com.operations.Common.ReadUserconfig;
 import com.testcases.driverscripts.Execute_FailedScript;
 import com.testcases.driverscripts.Execute_MainScript;
@@ -15,8 +16,10 @@ public class CreateExecutionStatusHTMLfile {
 
 	//public static void main(String[] args) throws IOException {
 	// TODO Auto-generated method stub
+	ReadStats rs = new ReadStats();
 
 	public void GenerateFinalExecutionStatus() throws IOException {
+		rs.getRepositoryValues();
 		Date date;
 		SimpleDateFormat Time;
 		Date Sdate=Execute_MainScript.Startdate;
@@ -29,6 +32,8 @@ public class CreateExecutionStatusHTMLfile {
 		String ExecutionStatus = null;
 		FileWriter writer = new FileWriter("./test-output/MailStatus.html", false);
 		String StatusColor=null;
+		String mailBOdy = null;
+		String FinalMailBody = null;
 
 
 
@@ -66,7 +71,7 @@ public class CreateExecutionStatusHTMLfile {
 			StatusColor="#FFA500";
 		}
 
-		String mailBOdy="Test execution status as below :"+"<br />"+"<br />"
+		String tmpmailBOdy="Test execution status as below :"+"<br />"+"<br />"
 				+"<p style='color:"+StatusColor+";font-size:20px'><font color='Black'; size=2px><b>Test Execution Status: </font>"+ExecutionStatus+"</b></p>"
 				+ "<b>Test browser : </b>"+browser+"<br />"
 				+ "<b>Test execution Start Time : </b>"+Sdate+"<br />"
@@ -84,12 +89,24 @@ public class CreateExecutionStatusHTMLfile {
 				+ "<td>"+passcount+"</td>"
 				+ "<td>"+failcount+"</td>"
 				+ "<td>"+skipcount+"</td></tr></tbody></table>"
-				+ "<br />"+"<br />"+"<br />"+"<br />"+"<br />"+"<br />"
-				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />"+"<br />"
-				+"<b>NOTE: We have disabled 2 testcases related to Contact Us Page (https://ectest.kamandirect.com/storeus/Kaman-locations) from today's Sanity run due to functional issues.</b>";
-				
+				+ "<br />"+"<br />"+"<br />"+"<br />"+"<br />"
+				+ "<p>Kindly find attached HTML report for more information about Test execution summary.</p>"+"<br />";
+		/*if (rs.Envtype.equalsIgnoreCase("ECTEST")) {
+			mailBOdy = tmpmailBOdy.concat("<b>NOTE: From this Sanity run , we have disabled 2 testcases on ECTEST which are related to Contact Us Page (https://ectest.kamandirect.com/storeus/Kaman-locations) due to functional issues.</b>");
+			System.out.println(mailBOdy);
+		}
 
-		writer.write(mailBOdy);
+		if (mailBOdy==null) {
+
+			tmpmailBOdy=new String(FinalMailBody);
+		}
+
+		else {
+
+			FinalMailBody=new String(mailBOdy);
+		}*/
+		FinalMailBody=new String(tmpmailBOdy);
+		writer.write(FinalMailBody);
 		writer.close();
 		System.out.println("Success...");
 	}
