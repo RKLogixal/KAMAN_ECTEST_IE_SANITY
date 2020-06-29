@@ -96,6 +96,7 @@ public class Execute_MainScript {
 	String Testcase_description; 
 	String Executionmode;
 	String Severity;
+	String LogJiraTicket;
 	public static String ExecutionRound;
 	int DeviceScrHeight;
 	int DeviceScrWidth;

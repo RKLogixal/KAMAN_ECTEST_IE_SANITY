@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Set;
 
+import org.apache.commons.lang.exception.ExceptionUtils;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.openqa.selenium.Cookie;
@@ -24,6 +25,8 @@ import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
+import com.JiraProcess.JiraRules;
+import com.JiraProcess.SendJiraDetails;
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.markuputils.ExtentColor;
 import com.aventstack.extentreports.markuputils.MarkupHelper;
@@ -52,6 +55,7 @@ public class Execute_FailedScript {
 	public static Date Enddate_Email;
 	int FailTestcasecounter;
 	public static int failcounter;
+	
 
 	Execute_MainScript exMain = new Execute_MainScript();
 	ReadUserconfig uc =new ReadUserconfig();
@@ -68,7 +72,7 @@ public class Execute_FailedScript {
 	}
 
 
-
+	//@JiraRules(logJiraTicket=true)
 	@Test(priority =1 ,dataProvider = "Fetch_FailedTC_data",dataProviderClass=FailedTC_Master_data.class)
 	public void ExecuteFailedTC(String Section,String Functionality,String Testcasenumber, String Testcase_description , String Executionmode,String Severity) throws Throwable {
 
@@ -205,83 +209,92 @@ public class Execute_FailedScript {
 			/*exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
 			exMain.test.fail(MarkupHelper.createLabel("Test failed",ExtentColor.RED));*/
 			failcounter = failcounter +1;
+		
 
-		}        
-		else if (result.getStatus() == ITestResult.SKIP) {
+			/*if(uc.LogJira.equalsIgnoreCase("yes")) {
 
-
-			exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
-			exMain.test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
-			Execute_MainScript.skipcounter = Execute_MainScript.skipcounter +1;
-		}
-
-
-		else if (result.getStatus() == ITestResult.SUCCESS) {
-
-			exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
-			exMain.test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
-			System.out.println("Test execution status : PASSED...$$$$");
-			Execute_MainScript.Passcounter = Execute_MainScript.Passcounter +1;
-
-		}
-
+				SendJiraDetails JiraDetails = new SendJiraDetails(uc.JiraURL, uc.JiraUsername, uc.JiraAPIKey, uc.JiraProjectName);
+				String DefectTitle = Testcasenumber + "  Failed ...!!!";
+				String Defectdescription=result.getThrowable().getMessage() + "\n" + ExceptionUtils.getFullStackTrace(result.getThrowable());
+				JiraDetails.LogJiraDefect("Bug", DefectTitle, Defectdescription, "Unassigned");
+			}     */   
 	}
+			else if (result.getStatus() == ITestResult.SKIP) {
 
-	@AfterClass
-	@Parameters({"browser"})
 
-	public void close(String browser) throws IOException {
-		Execute_MainScript.extent.flush();
-		Enddate = new Date() ;
-		EndTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss") ;
-		Enddate_Email = new Date() ;
-		EndTime_Email = new SimpleDateFormat("MM-dd-yyyy hh:mm") ;
-		EndTime_Email.setTimeZone(exMain.timeZone);
-		EndTime_Email = new SimpleDateFormat("mm/dd/yyyy hh:mm",Locale.getDefault()) ;
-		Execute_MainScript.Applog.info("Execution ended on : " + EndTime.format(Enddate));
-		System.out.println("Execution ended on : " + EndTime.format(Enddate));
-		long diff = Enddate.getTime() - Execute_MainScript.Startdate.getTime();
-		long diffSeconds = diff / 1000 % 60;
-		long diffMinutes = diff / (60 * 1000) % 60;
-		long diffHours = diff / (60 * 60 * 1000) % 24;
-		System.out.print("Total Time for Execution : ");
-		System.out.print(diffHours + " hours, ");
-		System.out.print(diffMinutes + " minutes, ");
-		System.out.print(diffSeconds + " seconds.");
-		exMain.html.GenerateFinalExecutionStatus();
-	}
-
-	@AfterClass(dependsOnMethods="close")
-	@Parameters({"browser"})
-
-	public void closebrowser(String browser) throws IOException {	
-		if (browser.equalsIgnoreCase("firefox")){
-			Execute_MainScript.webdriver.close();	
-			Runtime rt = Runtime.getRuntime();
-			rt.exec("taskkill /F /IM geckodriver.exe");
-		}
-		else if(browser.equalsIgnoreCase("chrome")){
-			Execute_MainScript.webdriver.close();
-			if(uc.OS.equalsIgnoreCase("Windows")) {
-				Runtime rt = Runtime.getRuntime();
-				rt.exec("taskkill /F /IM chromedriver.exe");
-
+				exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
+				exMain.test.skip(MarkupHelper.createLabel(Testcasenumber+" has been skipped for this execution...", ExtentColor.AMBER));
+				Execute_MainScript.skipcounter = Execute_MainScript.skipcounter +1;
 			}
 
 
-		}
-		else if(browser.equalsIgnoreCase("ie11")){
-			Execute_MainScript.webdriver.close();
-			Runtime rt = Runtime.getRuntime();
-			rt.exec("taskkill /F /IM IEDriverServer.exe");
-			rt.exec("taskkill /F /IM iexplore.exe");
-		}
-		else if(browser.equalsIgnoreCase("safari")){
-			Execute_MainScript.webdriver.close();
+			else if (result.getStatus() == ITestResult.SUCCESS) {
+
+				exMain.test = Execute_MainScript.extent.createTest(Execute_MainScript.browser+"_"+Testcasenumber);
+				exMain.test.pass(MarkupHelper.createLabel(Testcasenumber + " has been passed", ExtentColor.GREEN));
+				System.out.println("Test execution status : PASSED...$$$$");
+				Execute_MainScript.Passcounter = Execute_MainScript.Passcounter +1;
+
+			}
 
 		}
+	
+	
+		@AfterClass
+		@Parameters({"browser"})
+
+		public void close(String browser) throws IOException {
+			Execute_MainScript.extent.flush();
+			Enddate = new Date() ;
+			EndTime = new SimpleDateFormat("yyyy-MM-dd_HH-mm-ss") ;
+			Enddate_Email = new Date() ;
+			EndTime_Email = new SimpleDateFormat("MM-dd-yyyy hh:mm") ;
+			EndTime_Email.setTimeZone(exMain.timeZone);
+			EndTime_Email = new SimpleDateFormat("mm/dd/yyyy hh:mm",Locale.getDefault()) ;
+			Execute_MainScript.Applog.info("Execution ended on : " + EndTime.format(Enddate));
+			System.out.println("Execution ended on : " + EndTime.format(Enddate));
+			long diff = Enddate.getTime() - Execute_MainScript.Startdate.getTime();
+			long diffSeconds = diff / 1000 % 60;
+			long diffMinutes = diff / (60 * 1000) % 60;
+			long diffHours = diff / (60 * 60 * 1000) % 24;
+			System.out.print("Total Time for Execution : ");
+			System.out.print(diffHours + " hours, ");
+			System.out.print(diffMinutes + " minutes, ");
+			System.out.print(diffSeconds + " seconds.");
+			exMain.html.GenerateFinalExecutionStatus();
+		}
+
+		@AfterClass(dependsOnMethods="close")
+		@Parameters({"browser"})
+
+		public void closebrowser(String browser) throws IOException {	
+			if (browser.equalsIgnoreCase("firefox")){
+				Execute_MainScript.webdriver.close();	
+				Runtime rt = Runtime.getRuntime();
+				rt.exec("taskkill /F /IM geckodriver.exe");
+			}
+			else if(browser.equalsIgnoreCase("chrome")){
+				Execute_MainScript.webdriver.close();
+				if(uc.OS.equalsIgnoreCase("Windows")) {
+					Runtime rt = Runtime.getRuntime();
+					rt.exec("taskkill /F /IM chromedriver.exe");
+
+				}
+
+
+			}
+			else if(browser.equalsIgnoreCase("ie11")){
+				Execute_MainScript.webdriver.close();
+				Runtime rt = Runtime.getRuntime();
+				rt.exec("taskkill /F /IM IEDriverServer.exe");
+				rt.exec("taskkill /F /IM iexplore.exe");
+			}
+			else if(browser.equalsIgnoreCase("safari")){
+				Execute_MainScript.webdriver.close();
+
+			}
+
+		}
+
 
 	}
-
-
-}
