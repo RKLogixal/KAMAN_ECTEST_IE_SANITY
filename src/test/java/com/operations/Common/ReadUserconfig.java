@@ -23,6 +23,12 @@ public class ReadUserconfig {
 	public String emailFrom;
 	public String emailTo;
 	public String envtype;
+	public String LogJira;
+	public String JiraURL;
+	public String JiraUsername;
+	public String JiraAPIKey;
+	public String JiraProjectName;
+	
 	//Properties c = new Properties();
  
 @Test
@@ -47,6 +53,12 @@ public class ReadUserconfig {
 		emailFrom=prop1.getProperty("emailFrom");
 		emailTo=prop1.getProperty("emailTo");
 		envtype=prop1.getProperty("Envtype");
+		LogJira=prop1.getProperty("LogJiraTicket");
+		JiraURL=prop1.getProperty("JiraURL");
+		JiraUsername=prop1.getProperty("JiraUsername");
+		JiraAPIKey=prop1.getProperty("JiraAPIKey");
+		JiraProjectName=prop1.getProperty("JiraProjectName");
+		
 		}
 
 	

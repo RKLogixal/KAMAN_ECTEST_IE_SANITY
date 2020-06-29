@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Suite" parallel="tests" thread-count="2">
+
+<listeners>
+<listener class-name="com.JiraProcess.JiraListeners"/>
+</listeners>
+ 
+
      <test name="IE_test">
     <parameter name="browser" value="IE" />
 	 <parameter name="Channel" value="Desktop" />
@@ -9,7 +15,7 @@
     <parameter name="DeviceScrHeight" value="812" />
     
     <classes>
-     <class name="com.testcases.driverscripts.Closecon"/>
+     <class name="com.JiraProcess.NewTest"/>
     </classes>
 	 </test> <!-- Test -->
       </suite> <!-- Suite -->
