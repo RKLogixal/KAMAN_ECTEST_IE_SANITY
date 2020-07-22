@@ -91,6 +91,10 @@
                  <Registered_Password>${Registered_Password}</Registered_Password>
                  <Managed_Username>${Managed_Username}</Managed_Username>
                  <Managed_Password>${Managed_Password}</Managed_Password>
+                 <SelfService_SU_Username>${SelfService_SU_Username}</SelfService_SU_Username>
+                 <SelfService_SU_Password>${SelfService_SU_Password}</SelfService_SU_Password>
+                 <SelfService_MU_Username>${SelfService_MU_Username}</SelfService_MU_Username>
+                 <SelfService_MU_Password>${SelfService_MU_Password}</SelfService_MU_Password>
                  <Envtype>${Envtype}</Envtype>
                   <browser>${browser}</browser>
                 </systemPropertyVariables>
