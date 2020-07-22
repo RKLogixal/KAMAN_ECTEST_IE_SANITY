@@ -27,6 +27,10 @@ public class CollectTestData {
 			out.write("BaseURL="+ System.getProperty("BaseURL")+"\n"); 
 			out.write("Envtype="+ System.getProperty("Envtype")+"\n"); 
 			out.write("Browser="+ System.getProperty("browser")+"\n");
+			out.write("SelfService_SU_Username="+ System.getProperty("SelfService_SU_Username")+"\n");
+			out.write("SelfService_SU_Password="+ System.getProperty("SelfService_SU_Password")+"\n");
+			out.write("SelfService_MU_Username="+ System.getProperty("SelfService_MU_Username")+"\n");
+			out.write("SelfService_MU_Password="+ System.getProperty("SelfService_MU_Password")+"\n");
 			out.flush();
 			out.close(); 
 		} 
