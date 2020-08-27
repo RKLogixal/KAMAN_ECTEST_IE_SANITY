@@ -1,4 +1,4 @@
-package com.Utilities;
+/*package com.Utilities;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.DataOutputStream;
@@ -34,7 +34,7 @@ import com.operations.Common.ReadUserconfig;
 public class PunchOutURLCreation {
 
 	//public static void main(String[] args) {
-	// TODO Auto-generated method stub
+		// TODO Auto-generated method stub
 	public void GeneratePunchOutURL(){
 
 		try {
@@ -164,19 +164,9 @@ public class PunchOutURLCreation {
 				out.writeBytes(Mega);
 			}
 
-			else if(Envtype.startsWith("LogixalQA")) {
+			else if(Envtype.equalsIgnoreCase("LogixalQA")) {
 
-				if(Envtype.contains("Box1")) {
-
-					url = new URL(" https://192.168.15.18/storeus/catalog/b2bPunchoutSetup.jsp");
-
-				}
-				else if(Envtype.contains("Box2")){
-
-					url = new URL(" https://192.168.15.81/storeus/catalog/b2bPunchoutSetup.jsp");
-					//url = new URL(" https://kamanlocal.com/storeus/catalog/b2bPunchoutSetup.jsp");
-				}
-
+				url = new URL("https://192.168.15.18/storeus/catalog/b2bPunchoutSetup.jsp");
 				con = (HttpURLConnection) url.openConnection();
 
 				con.setRequestMethod("POST");
@@ -194,7 +184,7 @@ public class PunchOutURLCreation {
 				parameters.put("COMPANY_ID", "cceWDI");
 				parameters.put("LOGIN_ID", "jpj"+uniqueStr);
 				parameters.put("PASSWORD", "topfuel");
-				parameters.put("WM_HOOK_URL", " https://kamanlocal.com/");
+				parameters.put("WM_HOOK_URL", "https://192.168.15.18.com/");
 				parameters.put("MARKETPLACE_ID", "C1");
 				parameters.put("DESTROY_CART_AT_LOGIN", "1");
 				parameters.put("ALLOW_CART_EDIT", "1");
@@ -256,7 +246,7 @@ public class PunchOutURLCreation {
 				parameters.put("BILL_ADDRESS_FAX", "");
 
 				parameters.put("RESERVED_FIELD1", "");
-				parameters.put("RESERVED_FIELD2", " https://kamanlocal.com/web/viewshoppingcart.jsp?testvariable=ABC&amp;amptest=true");
+				parameters.put("RESERVED_FIELD2", "https://149.158.22.11:4436/web/viewshoppingcart.jsp?testvariable=ABC&amp;amptest=true");
 				parameters.put("RESERVED_FIELD3", "testdata");
 				parameters.put("RESERVED_FIELD4", "cccWDI");
 				parameters.put("RESERVED_FIELD5", "ANDI");
@@ -319,7 +309,7 @@ public class PunchOutURLCreation {
 
 					PunchOutURLForTest = getPunchOutURL(PunchURL);
 				}
-				else if (Envtype.startsWith("LogixalQA")) {
+				else if (Envtype.equalsIgnoreCase("LogixalQA")) {
 
 					String StrContent =String.valueOf(content);
 					String[] parts = StrContent.split("=", 3);
@@ -337,7 +327,7 @@ public class PunchOutURLCreation {
 			}
 
 			System.out.println("END");
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -411,3 +401,4 @@ public class PunchOutURLCreation {
 
 	}
 }
+*/
