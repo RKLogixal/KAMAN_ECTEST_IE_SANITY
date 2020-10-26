@@ -91,6 +91,7 @@ public class Execute_MainScript {
 	public static String Sitename;
 	public static String Channel;
 	String Device;
+	public static String Env;
 	String Section;
 	String Functionality;
 	String Testcase_description; 
@@ -198,6 +199,7 @@ public class Execute_MainScript {
 	{
 		this.browser=rs.browser;
 		this.Channel=Channel;
+		this.Env=rs.Envtype;
 		//ChromeOptions options = new ChromeOptions();
 		//options.addArguments("start-maximized");
 		//options.addArguments("--disable-notifications");
@@ -389,13 +391,13 @@ public class Execute_MainScript {
 
 					if(uc.OS.equalsIgnoreCase("Windows")) {
 
-						FC.ExecuteTestcasesWindows(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog,ExecutionRound);
+						FC.ExecuteTestcasesWindows(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog,ExecutionRound,Env);
 						System.gc();
 					}
 
 					if(uc.OS.equalsIgnoreCase("Linux")) {
 
-						FC.ExecuteTestcasesLinux(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog);
+						///FC.ExecuteTestcasesLinux(Testcasenumber, scre, Sitename, browser,StartTime, Startdate, webdriver, Functionality, Section, Testcase_description, Executionmode, Severity, extent, Applog);
 					}
 
 					else {
@@ -406,11 +408,11 @@ public class Execute_MainScript {
 					//		Constants.Windows_ScreenshotsLocation+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser_name+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
 
 				}
-				else if (Channel.equalsIgnoreCase("Mobile")) {
+				/*else if (Channel.equalsIgnoreCase("Mobile")) {
 					scre.Execute_script(Sitename,browser,"./Input_files/Actual_testcases/"+uc.SiteName+"/","./Output_files/"+StartTime.format(Startdate)+"/"+Sitename+"/"+browser+"/"+Device+"/",
 							"./Screenshots/"+StartTime.format(Startdate)+"/"+uc.SiteName+"/"+browser+"/"+Device+"/", webdriver,Section,Functionality, Testcasenumber, Testcase_description, Executionmode, Severity,uc.Scr,uc.ExcelReports,extent,Applog);
 
-				}
+				}*/
 
 			} catch (TimeoutException Te) {
 
