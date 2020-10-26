@@ -40,13 +40,17 @@ public class Keywords_finder {
 	ExtentTest test;
 	//ExtentReports extent;
 	Logger log;
+	String browser;
+	String env;
 	//ExtentTest logger;
 
 
-	public Keywords_finder(WebDriver driver,Logger log ){
+	public Keywords_finder(WebDriver driver,Logger log,String browser,String env ){
 		this.driver = driver;
 		this.log=log;
 		this.test=test;
+		this.browser=browser;
+		this.env=env;
 		//this.extent=extent;
 		//this.logger=logger;
 	}
@@ -195,7 +199,7 @@ public class Keywords_finder {
 			break;
 
 
-		case "BACK":
+		case "NAVIGATE_BACK":
 
 			key.NAVIGATE_BACK(driver);
 
@@ -300,6 +304,25 @@ public class Keywords_finder {
 			key.TINY_SCROLL_DOWN(driver, test, log);
 
 			break;
+			
+		case "FULL_SCROLL_DOWN":
+			 
+			//  key.FULL_SCROLL_DOWN(driver, test, log,browser,env);
+			  JavascriptExecutor jse = (JavascriptExecutor) driver;
+				//jse.executeScript("window.scrollTo(0, document.body.scrollHeight)");
+				if (env.equalsIgnoreCase("prod") && browser.equalsIgnoreCase("IE11") ){
+					jse.executeScript("window.scrollBy(0,3300)", "");
+				}else if (env.equalsIgnoreCase("ECTEST") &&  browser.equalsIgnoreCase("IE11") ){
+					jse.executeScript("window.scrollBy(0,3400)", "");
+				}else if (env.equalsIgnoreCase("LogixalQABox2") &&  browser.equalsIgnoreCase("IE11") ){
+					jse.executeScript("window.scrollBy(0,2500)", "");
+				}else if (env.equalsIgnoreCase("prod") &&  browser.equalsIgnoreCase("chrome") ){
+					jse.executeScript("window.scrollBy(0,3200)", "");
+				}else if (env.equalsIgnoreCase("ECTEST") &&  browser.equalsIgnoreCase("chrome") ){
+					jse.executeScript("window.scrollBy(0,3300)", "");
+				}
+
+			 break;
 
 		case "SCROLL_WEBELEMENT":
 
